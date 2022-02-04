@@ -1,11 +1,10 @@
 <?php
 require 'config.php';
 
-if (isset($_GET['status'])) {
-    // if ($_GET['status'] == "gagal") {
-    //     echo "<div class='alert'>Username dan Password tidak sesuai !</div>";
-    // }
-}
+// if ($_GET['status'] == "gagal") {
+//     echo "<div class='alert'>Username dan Password tidak sesuai !</div>";
+// }
+
 
 // mengaktifkan session pada php
 session_start();

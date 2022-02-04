@@ -2,10 +2,10 @@
 // session_start();
 
 // cek apakah yang mengakses halaman ini sudah login
-// if (!isset($_SESSION['login'])) {
-//     header('location: ../../index.php?page=login&status=notlogin');
-//     exit();
-// }
+if (!isset($_SESSION['login'])) {
+    header('location: ../../index.php?page=login&status=notlogin');
+    exit();
+}
 
 require '../../config/config.php';
 
@@ -28,8 +28,8 @@ if (isset($_GET['id'])) {
 }
 
 if (isset($_POST['submit'])) {
-    $role_id    = $_POST['role_id'];
-    $role_level    = htmlspecialchars($_POST['role_level']);
+    $role_id    = htmlspecialchars($_POST['role_id']);
+    $role_level = htmlspecialchars($_POST['role_level']);
 
     $query_update = "UPDATE roles SET
                         role_level = '$role_level'
@@ -55,7 +55,7 @@ if (isset($_POST['submit'])) {
     }
 }
 ?>
-<title>Update Role &mdash; PHP MVC </title>
+<title>Update Role</title>
 <main>
     <div class="container-fluid px-4">
         <h1 class="mt-4">Role</h1>
@@ -72,12 +72,6 @@ if (isset($_POST['submit'])) {
                     </div>
                     <div class="mb-3">
                         <label for="role_level" class="form-label">Role Level</label>
-                        <select name="role_level" id="role_id" class="form-select" ?>">
-                            <!-- <option selected>Pilih Role</option> -->
-                            <?php foreach ($roles as $role) : ?>
-                                <option value="<?= $role['role_level'] ?>"><?= $role['role_level'] ?></option>
-                            <?php endforeach; ?>
-                        </select>
                         <input type="text" name="role_level" class="form-control" id="role_level" value="<?= $role['role_level'] ?>" required>
                     </div>
                     <button type="submit" name="submit" class="btn btn-primary">Save</button>

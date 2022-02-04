@@ -7,8 +7,11 @@
                 </div>
                 Dashboard
             </a>
+            <!-- <?php
+                    echo $_SESSION['role_id'];
+                    ?> -->
 
-            <?php if ($_SESSION['role_id'] == 1 || 2) : ?>
+            <?php if ($_SESSION['role_id'] == 1) : ?>
                 <a class="nav-link <?php if ($_GET['page'] == 'roles') echo 'active' ?>" href="index.php?page=roles">
                     <div class="sb-nav-link-icon">
                         <i class="bi bi-file-person-fill"></i>
@@ -45,14 +48,20 @@
                     </div>
                     Transaksi Pembelian
                 </a>
-                <a class="nav-link <?php if ($_GET['page'] == 'prediksi') echo 'active' ?>" href="index.php?page=prediksi">
+                <a class="nav-link <?php if ($_GET['page'] == 'peramalan') echo 'active' ?>" href="index.php?page=peramalan">
                     <div class="sb-nav-link-icon">
                         <i class="bi bi-bar-chart-line-fill"></i>
                     </div>
-                    Pediksi Penjualan Obat
+                    Peramalan
                 </a>
 
-            <?php elseif ($_SESSION['role_id'] == 3) : ?>
+            <?php elseif ($_SESSION['role_id'] == 2) : ?>
+                <!-- <a class="nav-link <?php if ($_GET['page'] == 'users') echo 'active' ?>" href="index.php?page=users">
+                    <div class="sb-nav-link-icon">
+                        <i class="bi bi-people-fill"></i>
+                    </div>
+                    Data Users
+                </a> -->
                 <a class="nav-link <?php if ($_GET['page'] == 'obat') echo 'active' ?>" href="index.php?page=obat">
                     <div class="sb-nav-link-icon">
                         <i class="bi bi-bag-plus-fill"></i>
@@ -71,37 +80,31 @@
                     </div>
                     Transaksi Pembelian
                 </a>
-                <a class="nav-link <?php if ($_GET['page'] == 'prediksi') echo 'active' ?>" href="index.php?page=prediksi">
+                <a class="nav-link <?php if ($_GET['page'] == 'peramalan') echo 'active' ?>" href="index.php?page=peramalan">
                     <div class="sb-nav-link-icon">
                         <i class="bi bi-bar-chart-line-fill"></i>
                     </div>
-                    Pediksi Penjualan Obat
+                    Peramalan
                 </a>
 
-            <?php elseif ($_SESSION['role_id'] == 4) : ?>
+            <?php else : ?>
                 <a class="nav-link <?php if ($_GET['page'] == 'obat') echo 'active' ?>" href="index.php?page=obat">
                     <div class="sb-nav-link-icon">
                         <i class="bi bi-bag-plus-fill"></i>
                     </div>
                     Data Obat
                 </a>
-                <a class="nav-link <?php if ($_GET['page'] == 'supplier') echo 'active' ?>" href="index.php?page=supplier">
+                <a class="nav-link <?php if ($_GET['page'] == 'pembelian') echo 'active' ?>" href="index.php?page=supplier">
                     <div class="sb-nav-link-icon">
                         <i class="bi bi-briefcase-fill"></i>
                     </div>
-                    Data Supplier
+                    Trnsaksi Pembelian
                 </a>
-                <a class="nav-link <?php if ($_GET['page'] == 'penjualan') echo 'active' ?>" href="index.php?page=penjualan">
+                <a class="nav-link <?php if ($_GET['page'] == 'peramalan') echo 'active' ?>" href="index.php?page=pembelian">
                     <div class="sb-nav-link-icon">
-                        <i class="bi bi-cart-check-fill"></i>
+                        <i class="bi bi-cart-plus-fill"></i>
                     </div>
-                    Transaksi Penjualan
-                </a>
-                <a class="nav-link <?php if ($_GET['page'] == 'prediksi') echo 'active' ?>" href="index.php?page=prediksi">
-                    <div class="sb-nav-link-icon">
-                        <i class="bi bi-bar-chart-line-fill"></i>
-                    </div>
-                    Prediksi Penjualan Obat
+                    Peramalan
                 </a>
             <?php endif; ?>
         </div>

@@ -1,11 +1,10 @@
 <?php
-// session_start();
 
 // cek apakah yang mengakses halaman ini sudah login
-// if (!isset($_SESSION['login'])) {
-//     header('location: ../../index.php?page=login&status=notlogin');
-//     exit();
-// }
+if (!isset($_SESSION['login'])) {
+    header('location: ../../index.php?page=login&status=notlogin');
+    exit();
+}
 
 require '../../config/config.php';
 
@@ -29,7 +28,7 @@ if (isset($_GET['id'])) {
 }
 
 if (isset($_POST['submit'])) {
-    $user_id    = $_POST['user_id'];
+    $user_id    = htmlspecialchars($_POST['user_id']);
     $username   = htmlspecialchars($_POST['username']);
     $fullname   = htmlspecialchars($_POST['fullname']);
     $password   = htmlspecialchars($_POST['password']);
@@ -62,7 +61,7 @@ if (isset($_POST['submit'])) {
     }
 }
 ?>
-<title>Update User &mdash; PHP MVC </title>
+<title>Update User</title>
 <main>
     <div class="container-fluid px-4">
         <h1 class="mt-4">Users</h1>

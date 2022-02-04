@@ -14,7 +14,7 @@ $id = $_GET['id'];
 function delete($id)
 {
     global $conn;
-    $query_delete = "DELETE FROM tbl_obat WHERE obat_id = $id";
+    $query_delete = "DELETE FROM tbl_penjualan WHERE penjualan_id = $id";
 
     mysqli_query($conn, $query_delete);
     return mysqli_affected_rows($conn);
@@ -23,15 +23,15 @@ function delete($id)
 if (delete($id) > 0) {
     echo '
         <script>
-            alert("Successfully deleted Obat!");
-            document.location="index.php?page=obat";
+            alert("Successfully deleted Penjualan!");
+            document.location="index.php?page=penjualan";
         </script>
     ';
 } else {
     echo '
         <script>
-            alert("Failed delete Obat!");
-            document.location="index.php?page=obat";
+            alert("Failed delete Penjualan!");
+            document.location="index.php?page=penjualan";
         </script>
     ';
 }

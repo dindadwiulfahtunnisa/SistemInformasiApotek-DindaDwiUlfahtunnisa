@@ -2,30 +2,42 @@
 // session_start();
 
 // cek apakah yang mengakses halaman ini sudah login
-// if (!isset($_SESSION['login'])) {
-//     header('location: ../../index.php?page=login&status=notlogin');
-//     exit();
-// }
+if (!isset($_SESSION['login'])) {
+    header('location: ../../index.php?page=login&status=notlogin');
+    exit();
+}
 
 require '../../config/config.php';
 
-$obats = query("SELECT * FROM tbl_obat");
+$suppliers = query("SELECT * FROM tbl_supplier");
+
 
 if (isset($_POST['submit'])) {
     $kode_obat      = htmlspecialchars($_POST['kode_obat']);
     $nama_obat      = htmlspecialchars($_POST['nama_obat']);
-    $satuan_obat    = htmlspecialchars($_POST['satuan_obat']);
-    $harga_obat     = htmlspecialchars($_POST['harga_obat']);
-    $hargabeli      = htmlspecialchars($_POST['hargabeli']);
     $kedaluwarsa    = htmlspecialchars($_POST['kedaluwarsa']);
+    $harga_beli     = htmlspecialchars($_POST['harga_beli']);
+    $harga_jual     = htmlspecialchars($_POST['harga_jual']);
+    $satuan_obat    = htmlspecialchars($_POST['satuan_obat']);
     $stok           = htmlspecialchars($_POST['stok']);
+    $supplier_id    = htmlspecialchars($_POST['supplier_id']);
 
-    $query_create = "INSERT INTO tbl_obat (kode_obat, nama_obat, satuan_obat, harga_obat, hargabeli, kedaluwarsa, stok) 
-                        VALUES ('$kode_obat', '$nama_obat', '$satuan_obat', '$harga_obat', '$hargabeli', '$kedaluwarsa', '$stok')";
+    $query_create = "INSERT INTO tbl_obat (
+                        kode_obat, nama_obat,
+                        kedaluwarsa, harga_beli,
+                        harga_jual, satuan_obat, 
+                        stok, supplier_id
+                        ) VALUES ( 
+                            '$kode_obat', '$nama_obat',
+                            '$kedaluwarsa',  '$harga_beli',
+                            '$harga_jual', '$satuan_obat',
+                            '$stok', '$supplier_id'
+                            )
+                    ";
 
     // Cek apakah kode_obat sudah ada di database
-    $username_checker = "SELECT * FROM tbl_obat WHERE kode_obat='$kode_obat'";
-    $check = mysqli_query($conn, $username_checker) or die(mysqli_error($conn));
+    $nama_obat_checker = "SELECT * FROM tbl_obat WHERE nama_obat='$nama_obat'";
+    $check = mysqli_query($conn, $nama_obat_checker) or die(mysqli_error($conn));
 
     if (mysqli_num_rows($check) == 0) {
         $create = mysqli_query($conn, $query_create) or die(mysqli_error($conn));
@@ -80,8 +92,8 @@ if (isset($_POST['submit'])) {
                         <input type="text" name="satuab_obat" class="form-control" id="satuab_obat" placeholder="Masukkan Satuan Jual" required>
                     </div> -->
                     <div class="mb-3">
-                        <label for="obat_id" class="form-label">Satuan Jual</label>
-                        <select name="obat_id" id="obat_id" class="form-select">
+                        <label for="satuan_obat" class="form-label">Satuan Jual</label>
+                        <select name="satuan_obat" id="satuan_obat" class="form-select">
                             <option selected>Pilih Satuan Jual</option>
                             <option value="Tablet">Tablet</option>
                             <option value="Strip">Strip</option>
@@ -91,15 +103,15 @@ if (isset($_POST['submit'])) {
                             <option value="Botol">Botol</option>
 
                         </select>
-                        <!-- <input type="obat_id" name="obat_id" class="form-control" id="obat_id" placeholder="Masukkan Password" required> -->
+                        <!-- <input type="satuan_obat" name="satuan_obat" class="form-control" id="satuan_obat" placeholder="Masukkan Password" required> -->
                     </div>
                     <div class="mb-3">
-                        <label for="harga_obat" class="form-label">Harga Obat</label>
-                        <input type="text" name="harga_obat" class="form-control" id="harga_obat" placeholder="Masukkan Harga Obat" required>
+                        <label for="harga_beli" class="form-label">Harga Beli Obat</label>
+                        <input type="text" name="harga_beli" class="form-control" id="harga_beli" placeholder="Masukkan Harga Beli Obat" required>
                     </div>
                     <div class="mb-3">
-                        <label for="hargabeli" class="form-label">Harga Beli Obat</label>
-                        <input type="text" name="hargabeli" class="form-control" id="hargabeli" placeholder="Masukkan Harga Beli Obat" required>
+                        <label for="harga_jual" class="form-label">Harga Jual Obat</label>
+                        <input type="text" name="harga_jual" class="form-control" id="harga_jual" placeholder="Masukkan Harga Jual Obat" required>
                     </div>
                     <div class="mb-3">
                         <label for="kedaluwarsa" class="form-label">Kedaluwarsa Obat</label>
@@ -107,26 +119,58 @@ if (isset($_POST['submit'])) {
                     </div>
                     <div class="mb-3">
                         <label for="stok" class="form-label">Stok Obat</label>
-                        <input type="text" name="stok" class="form-control" id="stok" placeholder="Masukkan Stok Obat" required>
+                        <input type="number" name="stok" class="form-control" id="stok" placeholder="Masukkan Stok Obat" required>
                     </div>
-
                     <div class="mb-3">
-                        <label for="role_id" class="form-label">Role</label>
-                        <select name="role_id" id="role_id" class="form-select">
-                            <option selected>Pilih Role</option>
-                            <?php foreach ($roles as $role) : ?>
-                                <option value="<?= $role['role_id'] ?>">
-                                    <?= $role['role_level'] ?>
+                        <label for="supplier_id" class="form-label">Supplier</label>
+                        <select name="supplier_id" id="supplier_id" class="form-select" value="<?= $row['supplier_id'] ?>">
+                            <option selected>Pilih Supplier</option>
+                            <?php foreach ($suppliers as $supplier) : ?>
+                                <option value="<?= $supplier['supplier_id'] ?>">
+                                    <?= $supplier['nama_supplier'] ?>
                                 </option>
                             <?php endforeach; ?>
                         </select>
-                        <!-- <input type="role_id" name="role_id" class="form-control" id="role_id" placeholder="Masukkan Password" required> -->
                     </div>
                     <button type="submit" name="submit" class="btn btn-primary">Save</button>
                     <button type="reset" class="btn btn-dark">Clear</button>
-                    <a href="index.php?page=obat" class="btn btn-secondary">Cancel</a>
+                    <a href="index.php?page=supplier" class="btn btn-secondary">Cancel</a>
                 </form>
             </div>
         </div>
     </div>
 </main>
+
+<script>
+    $('.btn-number').click(function(e) {
+        e.preventDefault();
+
+        fieldName = $(this).attr('data-field');
+        type = $(this).attr('data-type');
+        var input = $("input[name='" + fieldName + "']");
+        var currentVal = parseInt(input.val());
+        if (!isNaN(currentVal)) {
+            if (type == 'minus') {
+
+                if (currentVal > input.attr('min')) {
+                    input.val(currentVal - 1).change();
+                }
+                if (parseInt(input.val()) == input.attr('min')) {
+                    $(this).attr('disabled', true);
+                }
+
+            } else if (type == 'plus') {
+
+                if (currentVal < input.attr('max')) {
+                    input.val(currentVal + 1).change();
+                }
+                if (parseInt(input.val()) == input.attr('max')) {
+                    $(this).attr('disabled', true);
+                }
+
+            }
+        } else {
+            input.val(0);
+        }
+    });
+</script>

@@ -2,10 +2,10 @@
 // session_start();
 
 // cek apakah yang mengakses halaman ini sudah login
-// if (!isset($_SESSION['login'])) {
-//     header('location: ../../index.php?page=login&status=notlogin');
-//     exit();
-// }
+if (!isset($_SESSION['login'])) {
+    header('location: ../../index.php?page=login&status=notlogin');
+    exit();
+}
 
 require '../../config/config.php';
 
@@ -13,7 +13,7 @@ $users = query("SELECT * FROM users INNER JOIN roles ON roles.role_id = users.ro
 $no = 1
 
 ?>
-<title>Data Users &mdash; PHP MVC</title>
+<title>Data Users</title>
 <main>
     <div class="container-fluid px-4">
         <h1 class="mt-4">Users</h1>

@@ -1,19 +1,12 @@
 <?php
-// session_start();
-
-// cek apakah yang mengakses halaman ini sudah login
-// if (!isset($_SESSION['login'])) {
-//     header('location: ../../index.php?page=login&status=notlogin');
-//     exit();
-// }
 
 require '../../config/config.php';
 
 $suppliers = query("SELECT * FROM tbl_supplier");
-$no = 1
+$no = 1;
 
 ?>
-<title>Data Supplier &mdash; PHP MVC</title>
+<title>Data Supplier</title>
 <main>
     <div class="container-fluid px-4">
         <h1 class="mt-4">Supplier</h1>

@@ -2,10 +2,10 @@
 // session_start();
 
 // cek apakah yang mengakses halaman ini sudah login
-// if (!isset($_SESSION['login'])) {
-//     header('location: ../../index.php?page=login&status=notlogin');
-//     exit();
-// }
+if (!isset($_SESSION['login'])) {
+    header('location: ../../index.php?page=login&status=notlogin');
+    exit();
+}
 
 require '../../config/config.php';
 
@@ -13,7 +13,7 @@ $roles = query("SELECT * FROM roles");
 $no = 1
 
 ?>
-<title>Data Roles &mdash; PHP MVC</title>
+<title>Data Roles</title>
 <main>
     <div class="container-fluid px-4">
         <h1 class="mt-4">Roles</h1>
@@ -42,7 +42,6 @@ $no = 1
                                 <td><?= $no++; ?></td>
                                 <!-- <td><?= $role['role_id']; ?></td> -->
                                 <td><?= $role['role_level']; ?></td>
-                                </td>
                                 <td>
                                     <a href="index.php?page=roles/update&id=<?= $role['role_id'] ?>" class="btn btn-sm btn-warning">Edit</a>
                                     <a href="index.php?page=roles/delete&id=<?= $role['role_id'] ?>" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure to delete Role?')">Delete</a>
@@ -54,5 +53,3 @@ $no = 1
             </div>
         </div>
 </main>
-
-<!-- Button trigger modal -->

@@ -2,10 +2,10 @@
 // session_start();
 
 // cek apakah yang mengakses halaman ini sudah login
-// if (!isset($_SESSION['login'])) {
-//     header('location: ../../index.php?page=login&status=notlogin');
-//     exit();
-// }
+if (!isset($_SESSION['login'])) {
+    header('location: ../../index.php?page=login&status=notlogin');
+    exit();
+}
 
 require '../../config/config.php';
 
@@ -13,7 +13,7 @@ $obats = query("SELECT * FROM tbl_obat INNER JOIN tbl_supplier ON tbl_obat.suppl
 $no = 1
 
 ?>
-<title>Data Obat &mdash; PHP MVC</title>
+<title>Data Obat</title>
 <main>
     <div class="container-fluid px-4">
         <h1 class="mt-4">Obat</h1>
@@ -35,6 +35,7 @@ $no = 1
                         <!-- <th scope="col">ID Obat</th> -->
                         <th scope="col">Kode Obat</th>
                         <th scope="col">Nama Obat</th>
+                        <th scope="col">Harga Beli</th>
                         <th scope="col">Harga Obat</th>
                         <th scope="col">Stok</th>
                         <th scope="col">Kedaluwarsa</th>
@@ -48,14 +49,15 @@ $no = 1
                                 <!-- <td><?= $obat['obat_id']; ?></td> -->
                                 <td><?= $obat['kode_obat']; ?></td>
                                 <td><?= $obat['nama_obat']; ?></td>
-                                <td><?= $obat['harga_obat']; ?></td>
+                                <td>Rp <?= $obat['harga_beli']; ?></td>
+                                <td>Rp <?= $obat['harga_jual']; ?></td>
                                 <td><?= $obat['stok']; ?></td>
                                 <td><?= $obat['kedaluwarsa']; ?></td>
                                 <td><?= $obat['nama_supplier']; ?></td>
                                 <td>
                                     <a href="index.php?page=obat/detail&id=<?= $obat['obat_id'] ?>" class="btn btn-sm btn-dark">Detail</a>
                                     <a href="index.php?page=obat/update&id=<?= $obat['obat_id'] ?>" class="btn btn-sm btn-warning">Edit</a>
-                                    <a href="index.php?page=obat/delete&id=<?= $obat['obat_id'] ?>" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure to delete user?')">Delete</a>
+                                    <a href="index.php?page=obat/delete&id=<?= $obat['obat_id'] ?>" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure to delete Obat?')">Delete</a>
                                 </td>
                             </tr>
                         <?php endforeach; ?>
