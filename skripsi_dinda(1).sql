@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 03, 2022 at 10:01 AM
+-- Generation Time: Feb 04, 2022 at 07:25 PM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 7.4.24
 
@@ -53,9 +53,9 @@ CREATE TABLE `tbl_obat` (
   `kode_obat` varchar(10) NOT NULL,
   `nama_obat` varchar(50) NOT NULL,
   `kedaluwarsa` date NOT NULL,
-  `harga_obat` int(11) NOT NULL,
+  `harga_beli` int(11) NOT NULL,
+  `harga_jual` int(11) NOT NULL,
   `satuan_obat` varchar(10) NOT NULL,
-  `hargabeli` int(11) NOT NULL,
   `stok` int(11) NOT NULL,
   `supplier_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -64,9 +64,9 @@ CREATE TABLE `tbl_obat` (
 -- Dumping data for table `tbl_obat`
 --
 
-INSERT INTO `tbl_obat` (`obat_id`, `kode_obat`, `nama_obat`, `kedaluwarsa`, `harga_obat`, `satuan_obat`, `hargabeli`, `stok`, `supplier_id`) VALUES
-(1, 'OB001', 'Bodrex', '2023-02-01', 5000, '', 0, 0, 1),
-(2, 'OB002', 'Milanta', '2022-02-03', 5000, '', 0, 0, 1);
+INSERT INTO `tbl_obat` (`obat_id`, `kode_obat`, `nama_obat`, `kedaluwarsa`, `harga_beli`, `harga_jual`, `satuan_obat`, `stok`, `supplier_id`) VALUES
+(10, 'OB001', 'Bodrek', '2022-02-03', 10000, 7000, 'Tablet', 15, 1),
+(15, 'OB010', 'Duminnnn', '2022-07-22', 20000, 21000, 'Tablet', 500, 1);
 
 -- --------------------------------------------------------
 
@@ -76,12 +76,22 @@ INSERT INTO `tbl_obat` (`obat_id`, `kode_obat`, `nama_obat`, `kedaluwarsa`, `har
 
 CREATE TABLE `tbl_pembelian` (
   `pembelian_id` int(11) NOT NULL,
-  `kode_pembelian` int(11) NOT NULL,
+  `kode_pembelian` varchar(10) NOT NULL,
   `obat_id` int(11) NOT NULL,
   `kode_obat` varchar(10) NOT NULL,
+  `supplier_id` int(11) NOT NULL,
+  `bulan` varchar(11) NOT NULL,
+  `tahun` year(4) NOT NULL,
   `tgl_pembelian` date NOT NULL,
   `total_pembelian` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `tbl_pembelian`
+--
+
+INSERT INTO `tbl_pembelian` (`pembelian_id`, `kode_pembelian`, `obat_id`, `kode_obat`, `supplier_id`, `bulan`, `tahun`, `tgl_pembelian`, `total_pembelian`) VALUES
+(1, 'PB001', 10, 'OB010', 0, 'Januari', 2022, '2022-02-05', 2);
 
 -- --------------------------------------------------------
 
@@ -93,10 +103,18 @@ CREATE TABLE `tbl_penjualan` (
   `penjualan_id` int(11) NOT NULL,
   `kode_penjualan` varchar(10) NOT NULL,
   `obat_id` int(11) NOT NULL,
+  `bulan` varchar(11) NOT NULL,
+  `tahun` year(4) NOT NULL,
   `tgl_penjualan` date NOT NULL,
-  `jumlah` int(11) NOT NULL,
-  `total_harga` int(11) NOT NULL
+  `jumlah` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `tbl_penjualan`
+--
+
+INSERT INTO `tbl_penjualan` (`penjualan_id`, `kode_penjualan`, `obat_id`, `bulan`, `tahun`, `tgl_penjualan`, `jumlah`) VALUES
+(1, 'P001', 10, 'Januari', 2022, '2022-02-19', 3);
 
 -- --------------------------------------------------------
 
@@ -130,7 +148,7 @@ CREATE TABLE `tbl_supplier` (
 --
 
 INSERT INTO `tbl_supplier` (`supplier_id`, `kode_supplier`, `nama_supplier`, `alamat`, `nohp`) VALUES
-(1, 'SP001', 'PT. KIMIA FARMA', 'Jalan Sawahan No. 1', '082268266263');
+(1, 'SUP001', 'PT. KIMIA FARMA', 'Jalan Sawahan No. 2', '082268266263');
 
 -- --------------------------------------------------------
 
@@ -151,9 +169,9 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`user_id`, `username`, `fullname`, `password`, `role_id`) VALUES
-(3, 'developer', 'Nanda Hady Mulya', 'developer', 1),
-(4, 'runi', 'Runi', 'runi', 3),
-(9, 'dinda', 'DINDA DWI', 'dinda', 2),
+(3, 'developer', 'Dinda Dwi Ulfahtunnisa', 'developer', 1),
+(4, 'runi', 'Runi', 'runi', 4),
+(9, 'ruhul', 'Ruhul J', 'ruhul', 3),
 (10, 'meli', 'meli oktafiani', 'meli', 4);
 
 --
@@ -195,8 +213,7 @@ ALTER TABLE `tbl_peramalan`
 -- Indexes for table `tbl_supplier`
 --
 ALTER TABLE `tbl_supplier`
-  ADD PRIMARY KEY (`supplier_id`),
-  ADD UNIQUE KEY `kode_supplier` (`kode_supplier`);
+  ADD PRIMARY KEY (`supplier_id`);
 
 --
 -- Indexes for table `users`
@@ -219,19 +236,31 @@ ALTER TABLE `roles`
 -- AUTO_INCREMENT for table `tbl_obat`
 --
 ALTER TABLE `tbl_obat`
-  MODIFY `obat_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `obat_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+
+--
+-- AUTO_INCREMENT for table `tbl_pembelian`
+--
+ALTER TABLE `tbl_pembelian`
+  MODIFY `pembelian_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `tbl_penjualan`
+--
+ALTER TABLE `tbl_penjualan`
+  MODIFY `penjualan_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `tbl_supplier`
 --
 ALTER TABLE `tbl_supplier`
-  MODIFY `supplier_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `supplier_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- Constraints for dumped tables
