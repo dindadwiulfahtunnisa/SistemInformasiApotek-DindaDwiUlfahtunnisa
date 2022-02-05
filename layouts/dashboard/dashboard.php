@@ -35,7 +35,7 @@ if ($status == 'login') {
 }
 
 ?>
-<title>Dashboard &mdash; PHP MVC</title>
+<title>Dashboard</title>
 <main>
     <div class="container-fluid px-4">
         <h1 class="mt-4">Dashboard</h1>

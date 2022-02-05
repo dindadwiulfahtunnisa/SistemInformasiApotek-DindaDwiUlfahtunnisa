@@ -94,13 +94,13 @@
                     </div>
                     Data Obat
                 </a>
-                <a class="nav-link <?php if ($_GET['page'] == 'pembelian') echo 'active' ?>" href="index.php?page=supplier">
+                <a class="nav-link <?php if ($_GET['page'] == 'penjualan') echo 'active' ?>" href="index.php?page=penjualan">
                     <div class="sb-nav-link-icon">
                         <i class="bi bi-briefcase-fill"></i>
                     </div>
-                    Trnsaksi Pembelian
+                    Trnsaksi Penjualan
                 </a>
-                <a class="nav-link <?php if ($_GET['page'] == 'peramalan') echo 'active' ?>" href="index.php?page=pembelian">
+                <a class="nav-link <?php if ($_GET['page'] == 'peramalan') echo 'active' ?>" href="index.php?page=peramalan">
                     <div class="sb-nav-link-icon">
                         <i class="bi bi-cart-plus-fill"></i>
                     </div>
