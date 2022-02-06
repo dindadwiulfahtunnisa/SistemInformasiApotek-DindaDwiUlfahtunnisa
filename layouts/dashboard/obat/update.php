@@ -39,13 +39,13 @@ if (isset($_POST['submit'])) {
     $supplier_id    = htmlspecialchars($_POST['supplier_id']);
 
     $query_update = "UPDATE tbl_obat SET
-                        kode_obat = '$kode_obat',
-                        nama_obat = '$nama_obat',
+                        kode_obat   = '$kode_obat',
+                        nama_obat   = '$nama_obat',
                         kedaluwarsa = '$kedaluwarsa',
-                        harga_beli = '$harga_beli',
-                        harga_jual = '$harga_jual',
+                        harga_beli  = '$harga_beli',
+                        harga_jual  = '$harga_jual',
                         satuan_obat = '$satuan_obat',
-                        stok = '$stok',
+                        stok        = '$stok',
                         supplier_id = '$supplier_id'
                     WHERE obat_id = '$obat_id'
                     ";

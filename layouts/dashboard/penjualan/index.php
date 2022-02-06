@@ -21,6 +21,7 @@ $no = 1;
             </div>
             <div class="card-body">
                 <a href="?page=penjualan/create" class="btn btn-sm btn-primary mb-3">Add Penjualan</a>
+                <a href="?page=penjualan/laporan" class="btn btn-sm btn-primary mb-3">Laporan Penjualan</a>
 
                 <table class="table table-bordered table-hover table-responsive-sm text-center">
                     <thead class="table-dark">

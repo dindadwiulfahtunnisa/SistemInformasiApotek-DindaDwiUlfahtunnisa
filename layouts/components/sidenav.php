@@ -36,17 +36,17 @@
                     </div>
                     Data Supplier
                 </a>
-                <a class="nav-link <?php if ($_GET['page'] == 'penjualan') echo 'active' ?>" href="index.php?page=penjualan">
-                    <div class="sb-nav-link-icon">
-                        <i class="bi bi-cart-check-fill"></i>
-                    </div>
-                    Transaksi Penjualan
-                </a>
                 <a class="nav-link <?php if ($_GET['page'] == 'pembelian') echo 'active' ?>" href="index.php?page=pembelian">
                     <div class="sb-nav-link-icon">
                         <i class="bi bi-cart-plus-fill"></i>
                     </div>
                     Transaksi Pembelian
+                </a>
+                <a class="nav-link <?php if ($_GET['page'] == 'penjualan') echo 'active' ?>" href="index.php?page=penjualan">
+                    <div class="sb-nav-link-icon">
+                        <i class="bi bi-cart-check-fill"></i>
+                    </div>
+                    Transaksi Penjualan
                 </a>
                 <a class="nav-link <?php if ($_GET['page'] == 'peramalan') echo 'active' ?>" href="index.php?page=peramalan">
                     <div class="sb-nav-link-icon">

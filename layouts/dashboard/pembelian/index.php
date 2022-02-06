@@ -23,6 +23,7 @@ $no = 1;
             </div>
             <div class="card-body">
                 <a href="?page=pembelian/create" class="btn btn-sm btn-primary mb-3">Add Pembelian</a>
+                <a href="?page=pembelian/laporan" class="btn btn-sm btn-primary mb-3">Laporan Pembelian</a>
 
                 <table class="table table-bordered table-hover table-responsive-sm text-center">
                     <thead class="table-dark">
