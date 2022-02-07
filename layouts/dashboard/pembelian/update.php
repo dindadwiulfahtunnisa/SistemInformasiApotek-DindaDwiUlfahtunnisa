@@ -14,6 +14,7 @@ if (isset($_GET['id'])) {
 
     $pembelians = mysqli_query($conn, "SELECT * FROM tbl_pembelian WHERE pembelian_id = '$pembelian_id'");
     $obats = query("SELECT * FROM tbl_obat");
+    $suppliers = query("SELECT * FROM tbl_supplier");
 
 
     //jika hasil query = 0 maka muncul pesan error
@@ -108,6 +109,28 @@ if (isset($_POST['submit'])) {
                         <div class="mb-3">
                             <label for="kode_obat" class="form-label">Kode Obat</label>
                             <input type="text" name="kode_obat" class="form-control" id="kode_obat" value="<?= $obat['kode_obat'] ?>" readonly>
+                        </div>
+                    <?php endif ?>
+                    <div class="mb-3">
+                        <label for="supplier_id" class="form-label">Nama Supplier</label>
+                        <select name="supplier_id" id="supplier_id" class="form-select" value="<?= $pembelian['supplier_id']; ?>">
+                            <?php foreach ($suppliers as $supplier) : ?>
+                                <option value="<?= $supplier['supplier_id'] ?>">
+                                    <?= $supplier['nama_supplier'] ?>
+                                </option>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
+                    <?php
+                    if (!isset($pembelian['supplier_id'])) : ?>
+                        <div class="mb-3">
+                            <label for="kode_supplier" class="form-label">Kode Supplier</label>
+                            <input type="text" name="kode_supplier" class="form-control" id="kode_supplier" value="<?= $pembelian['kode_supplier'] ?>">
+                        </div>
+                    <?php else : ?>
+                        <div class="mb-3">
+                            <label for="kode_supplier" class="form-label">Kode Supplier</label>
+                            <input type="text" name="kode_supplier" class="form-control" id="kode_supplier" value="<?= $supplier['kode_supplier'] ?>" readonly>
                         </div>
                     <?php endif ?>
                     <div class="mb-3">

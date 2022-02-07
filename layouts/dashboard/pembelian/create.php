@@ -118,7 +118,7 @@ if (isset($_POST['submit'])) {
 
                     <button type="submit" name="submit" class="btn btn-primary">Save</button>
                     <button type="reset" class="btn btn-dark">Clear</button>
-                    <a href="index.php?page=supplier" class="btn btn-secondary">Cancel</a>
+                    <a href="index.php?page=pembelian" class="btn btn-secondary">Cancel</a>
                 </form>
             </div>
         </div>

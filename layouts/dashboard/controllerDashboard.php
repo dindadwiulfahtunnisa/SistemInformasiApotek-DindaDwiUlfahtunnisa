@@ -89,6 +89,10 @@ switch ($page) {
         include "pembelian/delete.php";
         break;
 
+    case 'pembelian/laporan':
+        include "pembelian/laporan.php";
+        break;
+
     case 'penjualan':
         include "penjualan/index.php";
         break;
@@ -103,6 +107,10 @@ switch ($page) {
 
     case 'penjualan/delete':
         include "penjualan/delete.php";
+        break;
+
+    case 'penjualan/laporan':
+        include "penjualan/laporan.php";
         break;
 
     case 'prediksi':

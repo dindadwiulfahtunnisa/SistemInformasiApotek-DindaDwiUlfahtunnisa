@@ -2,9 +2,10 @@
 
 require '../../config/config.php';
 
-$pembelians = query("SELECT * FROM tbl_pembelian INNER JOIN tbL_obat ON tbl_pembelian.obat_id = tbl_obat.obat_id");
-$pembelians2 = mysqli_connect($conn, "SELECT * FROM tbl_pembelian INNER JOIN tbl_supplier ON tbl_pembelian.obat_id = tbl_supplier.obat_id");
-$supplierPembelian = mysqli_fetch_assoc($conn, $pembelians2);
+$pembelians = query("SELECT * FROM tbl_pembelian
+                        INNER JOIN tbL_obat ON tbl_pembelian.obat_id = tbl_obat.obat_id
+                        INNER JOIN tbl_supplier ON tbl_pembelian.supplier_id = tbl_supplier.supplier_id
+                    ");
 $no = 1;
 
 ?>
@@ -49,11 +50,11 @@ $no = 1;
                                 <td><?= $pembelian['nama_obat']; ?></td>
                                 <td><?= $pembelian['kode_obat']; ?></td>
                                 <!-- <td><?= $pembelian['supplier_id']; ?></td> -->
-                                <td><?= $supplierPembelian['nama_supplier']; ?></td>
+                                <td><?= $pembelian['nama_supplier']; ?></td>
                                 <td><?= $pembelian['tgl_pembelian']; ?></td>
                                 <td><?= $pembelian['total_pembelian']; ?></td>
                                 <td>
-                                    <a href="index.php?page=pembelian/detail&id=<?= $pembelian['pembelian_id'] ?>" class="btn btn-sm btn-dark">Detail</a>
+                                    <!-- <a href="index.php?page=pembelian/detail&id=<?= $pembelian['pembelian_id'] ?>" class="btn btn-sm btn-dark">Detail</a> -->
                                     <a href="index.php?page=pembelian/update&id=<?= $pembelian['pembelian_id'] ?>" class="btn btn-sm btn-warning">Edit</a>
                                     <a href="index.php?page=pembelian/delete&id=<?= $pembelian['pembelian_id'] ?>" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure to delete pembelian?')">Delete</a>
                                 </td>
