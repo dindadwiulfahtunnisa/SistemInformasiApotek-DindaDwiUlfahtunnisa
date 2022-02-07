@@ -48,11 +48,11 @@
                     </div>
                     Transaksi Penjualan
                 </a>
-                <a class="nav-link <?php if ($_GET['page'] == 'peramalan') echo 'active' ?>" href="index.php?page=peramalan">
+                <a class="nav-link <?php if ($_GET['page'] == 'prediksi') echo 'active' ?>" href="index.php?page=prediksi">
                     <div class="sb-nav-link-icon">
                         <i class="bi bi-bar-chart-line-fill"></i>
                     </div>
-                    Peramalan
+                    Prediksi
                 </a>
 
             <?php elseif ($_SESSION['role_id'] == 2) : ?>
@@ -80,11 +80,11 @@
                     </div>
                     Transaksi Pembelian
                 </a>
-                <a class="nav-link <?php if ($_GET['page'] == 'peramalan') echo 'active' ?>" href="index.php?page=peramalan">
+                <a class="nav-link <?php if ($_GET['page'] == 'prediksi') echo 'active' ?>" href="index.php?page=prediksi">
                     <div class="sb-nav-link-icon">
                         <i class="bi bi-bar-chart-line-fill"></i>
                     </div>
-                    Peramalan
+                    Prediksi
                 </a>
 
             <?php else : ?>
@@ -100,11 +100,11 @@
                     </div>
                     Trnsaksi Penjualan
                 </a>
-                <a class="nav-link <?php if ($_GET['page'] == 'peramalan') echo 'active' ?>" href="index.php?page=peramalan">
+                <a class="nav-link <?php if ($_GET['page'] == 'prediksi') echo 'active' ?>" href="index.php?page=prediksi">
                     <div class="sb-nav-link-icon">
                         <i class="bi bi-cart-plus-fill"></i>
                     </div>
-                    Peramalan
+                    Prediksi
                 </a>
             <?php endif; ?>
         </div>
