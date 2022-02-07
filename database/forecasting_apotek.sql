@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 04, 2022 at 07:25 PM
+-- Generation Time: Feb 07, 2022 at 10:54 AM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 7.4.24
 
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `skripsi_dinda`
+-- Database: `forecasting_apotek`
 --
 
 -- --------------------------------------------------------
@@ -114,19 +114,22 @@ CREATE TABLE `tbl_penjualan` (
 --
 
 INSERT INTO `tbl_penjualan` (`penjualan_id`, `kode_penjualan`, `obat_id`, `bulan`, `tahun`, `tgl_penjualan`, `jumlah`) VALUES
-(1, 'P001', 10, 'Januari', 2022, '2022-02-19', 3);
+(1, 'P002', 10, 'Januari', 2022, '2022-02-19', 3);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tbl_peramalan`
+-- Table structure for table `tbl_prediksi`
 --
 
-CREATE TABLE `tbl_peramalan` (
+CREATE TABLE `tbl_prediksi` (
   `ramalan_id` int(11) NOT NULL,
   `kode_ramalan` int(11) NOT NULL,
   `obat_id` int(11) NOT NULL,
-  `kode_obat` int(11) NOT NULL
+  `kode_obat` int(11) NOT NULL,
+  `bulan` varchar(10) NOT NULL,
+  `tahun` year(4) NOT NULL,
+  `hasil` double NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -148,7 +151,7 @@ CREATE TABLE `tbl_supplier` (
 --
 
 INSERT INTO `tbl_supplier` (`supplier_id`, `kode_supplier`, `nama_supplier`, `alamat`, `nohp`) VALUES
-(1, 'SUP001', 'PT. KIMIA FARMA', 'Jalan Sawahan No. 2', '082268266263');
+(1, 'SUP001', 'PT. KIMIA FARMA', 'Jalan Sawahan No. 2', '082268266265');
 
 -- --------------------------------------------------------
 
@@ -171,8 +174,8 @@ CREATE TABLE `users` (
 INSERT INTO `users` (`user_id`, `username`, `fullname`, `password`, `role_id`) VALUES
 (3, 'developer', 'Dinda Dwi Ulfahtunnisa', 'developer', 1),
 (4, 'runi', 'Runi', 'runi', 4),
-(9, 'ruhul', 'Ruhul J', 'ruhul', 3),
-(10, 'meli', 'meli oktafiani', 'meli', 4);
+(10, 'meli', 'meli oktafiani', 'meli', 4),
+(16, 'ruhul', 'Ruhul J', 'ruhul', 3);
 
 --
 -- Indexes for dumped tables
@@ -204,9 +207,9 @@ ALTER TABLE `tbl_penjualan`
   ADD PRIMARY KEY (`penjualan_id`);
 
 --
--- Indexes for table `tbl_peramalan`
+-- Indexes for table `tbl_prediksi`
 --
-ALTER TABLE `tbl_peramalan`
+ALTER TABLE `tbl_prediksi`
   ADD PRIMARY KEY (`ramalan_id`);
 
 --
@@ -248,7 +251,7 @@ ALTER TABLE `tbl_pembelian`
 -- AUTO_INCREMENT for table `tbl_penjualan`
 --
 ALTER TABLE `tbl_penjualan`
-  MODIFY `penjualan_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `penjualan_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `tbl_supplier`
@@ -260,7 +263,7 @@ ALTER TABLE `tbl_supplier`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- Constraints for dumped tables
