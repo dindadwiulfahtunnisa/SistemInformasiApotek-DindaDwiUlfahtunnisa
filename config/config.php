@@ -4,7 +4,7 @@
 $localhost  = "localhost";
 $username   = "root";
 $password   = "";
-$db         = "skripsi_dinda";
+$db         = "forecasting_apotek";
 
 $conn = mysqli_connect($localhost, $username, $password, $db);
 
