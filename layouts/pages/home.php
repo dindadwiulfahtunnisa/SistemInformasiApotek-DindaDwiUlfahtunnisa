@@ -1,4 +1,4 @@
-<title>Home &mdash; PHP MVC</title>
+<title>Home &mdash; Apotek Ruhul J</title>
 <main>
     <!-- Header-->
     <header class="bg-dark py-5">

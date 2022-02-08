@@ -40,7 +40,7 @@ if (isset($_POST['submit'])) {
 }
 
 ?>
-<title>Register &mdash; PHP MVC </title>
+<title>Register &mdash; Apotek Ruhul J </title>
 <main class="bg-dark py-5">
     <div class="container p-md-5">
         <h4 class="text-white text-center font-weight-bold">Daftar Akun Super Admin </h4>

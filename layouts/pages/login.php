@@ -22,7 +22,7 @@ if ($status == 'notlogin') {
     ';
 }
 ?>
-<title>Login &mdash; PHP MVC</title>
+<title>Login &mdash; Apotek Ruhul J</title>
 <main class="bg-dark py-5">
     <div class="container p-md-5">
         <h4 class="text-white text-center font-weight-bold">Login Pengguna </h4>
