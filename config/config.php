@@ -3,7 +3,7 @@
 //koneksi ke database mysql,
 $localhost  = "localhost";
 $username   = "root";
-$password   = "";
+$password   = "root";
 $db         = "forecasting_apotek";
 
 $conn = mysqli_connect($localhost, $username, $password, $db);
