@@ -47,7 +47,6 @@ $no = 1;
                                 <td><?= $penjualan['tgl_penjualan']; ?></td>
                                 <td><?= $penjualan['jumlah']; ?></td>
                                 <td>
-                                    <a href="index.php?page=penjualan/detail&id=<?= $penjualan['penjualan_id'] ?>" class="btn btn-sm btn-dark">Detail</a>
                                     <a href="index.php?page=penjualan/update&id=<?= $penjualan['penjualan_id'] ?>" class="btn btn-sm btn-warning">Edit</a>
                                     <a href="index.php?page=penjualan/delete&id=<?= $penjualan['penjualan_id'] ?>" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure to delete Penjualan?')">Delete</a>
                                 </td>

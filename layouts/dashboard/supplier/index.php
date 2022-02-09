@@ -42,7 +42,6 @@ $no = 1;
                                 <td><?= $supplier['alamat']; ?></td>
                                 <td><?= $supplier['nohp']; ?></td>
                                 <td>
-                                    <a href="index.php?page=supplier/detail&id=<?= $supplier['supplier_id'] ?>" class="btn btn-sm btn-dark">Detail</a>
                                     <a href="index.php?page=supplier/update&id=<?= $supplier['supplier_id'] ?>" class="btn btn-sm btn-warning">Edit</a>
                                     <a href="index.php?page=supplier/delete&id=<?= $supplier['supplier_id'] ?>" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure to delete user?')">Delete</a>
                                 </td>
