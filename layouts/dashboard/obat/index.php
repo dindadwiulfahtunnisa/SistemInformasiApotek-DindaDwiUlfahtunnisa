@@ -55,7 +55,6 @@ $no = 1
                                 <td><?= $obat['kedaluwarsa']; ?></td>
                                 <td><?= $obat['nama_supplier']; ?></td>
                                 <td>
-                                    <a href="index.php?page=obat/detail&id=<?= $obat['obat_id'] ?>" class="btn btn-sm btn-dark">Detail</a>
                                     <a href="index.php?page=obat/update&id=<?= $obat['obat_id'] ?>" class="btn btn-sm btn-warning">Edit</a>
                                     <a href="index.php?page=obat/delete&id=<?= $obat['obat_id'] ?>" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure to delete Obat?')">Delete</a>
                                 </td>
