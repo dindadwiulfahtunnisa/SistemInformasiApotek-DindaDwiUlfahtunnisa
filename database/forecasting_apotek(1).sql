@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 07, 2022 at 10:54 AM
+-- Generation Time: Feb 12, 2022 at 04:31 AM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 7.4.24
 
@@ -65,8 +65,7 @@ CREATE TABLE `tbl_obat` (
 --
 
 INSERT INTO `tbl_obat` (`obat_id`, `kode_obat`, `nama_obat`, `kedaluwarsa`, `harga_beli`, `harga_jual`, `satuan_obat`, `stok`, `supplier_id`) VALUES
-(10, 'OB001', 'Bodrek', '2022-02-03', 10000, 7000, 'Tablet', 15, 1),
-(15, 'OB010', 'Duminnnn', '2022-07-22', 20000, 21000, 'Tablet', 500, 1);
+(10, 'OB001', 'Bodrek', '2022-02-03', 10000, 7000, 'Tablet', 15, 1);
 
 -- --------------------------------------------------------
 
@@ -91,7 +90,7 @@ CREATE TABLE `tbl_pembelian` (
 --
 
 INSERT INTO `tbl_pembelian` (`pembelian_id`, `kode_pembelian`, `obat_id`, `kode_obat`, `supplier_id`, `bulan`, `tahun`, `tgl_pembelian`, `total_pembelian`) VALUES
-(1, 'PB001', 10, 'OB010', 0, 'Januari', 2022, '2022-02-05', 2);
+(1, 'PB001', 10, 'OB001', 1, 'Januari', 2022, '2022-02-05', 4);
 
 -- --------------------------------------------------------
 
@@ -151,7 +150,8 @@ CREATE TABLE `tbl_supplier` (
 --
 
 INSERT INTO `tbl_supplier` (`supplier_id`, `kode_supplier`, `nama_supplier`, `alamat`, `nohp`) VALUES
-(1, 'SUP001', 'PT. KIMIA FARMA', 'Jalan Sawahan No. 2', '082268266265');
+(1, 'SUP001', 'PT. KIMIA FARMA', 'Jalan Sawahan No. 2', '082268266265'),
+(4, 'SUP002', 'PT. RATULANGI', 'Pagambiran', '012301974109');
 
 -- --------------------------------------------------------
 
@@ -174,7 +174,6 @@ CREATE TABLE `users` (
 INSERT INTO `users` (`user_id`, `username`, `fullname`, `password`, `role_id`) VALUES
 (3, 'developer', 'Dinda Dwi Ulfahtunnisa', 'developer', 1),
 (4, 'runi', 'Runi', 'runi', 4),
-(10, 'meli', 'meli oktafiani', 'meli', 4),
 (16, 'ruhul', 'Ruhul J', 'ruhul', 3);
 
 --
@@ -198,7 +197,9 @@ ALTER TABLE `tbl_obat`
 -- Indexes for table `tbl_pembelian`
 --
 ALTER TABLE `tbl_pembelian`
-  ADD PRIMARY KEY (`pembelian_id`);
+  ADD PRIMARY KEY (`pembelian_id`),
+  ADD KEY `sumber_obat` (`obat_id`),
+  ADD KEY `supplier_id` (`supplier_id`);
 
 --
 -- Indexes for table `tbl_penjualan`
@@ -233,7 +234,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `roles`
 --
 ALTER TABLE `roles`
-  MODIFY `role_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `role_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `tbl_obat`
@@ -257,7 +258,7 @@ ALTER TABLE `tbl_penjualan`
 -- AUTO_INCREMENT for table `tbl_supplier`
 --
 ALTER TABLE `tbl_supplier`
-  MODIFY `supplier_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `supplier_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `users`
@@ -274,6 +275,12 @@ ALTER TABLE `users`
 --
 ALTER TABLE `tbl_obat`
   ADD CONSTRAINT `sumber` FOREIGN KEY (`supplier_id`) REFERENCES `tbl_supplier` (`supplier_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `tbl_pembelian`
+--
+ALTER TABLE `tbl_pembelian`
+  ADD CONSTRAINT `sumber_obat` FOREIGN KEY (`obat_id`) REFERENCES `tbl_obat` (`obat_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `users`

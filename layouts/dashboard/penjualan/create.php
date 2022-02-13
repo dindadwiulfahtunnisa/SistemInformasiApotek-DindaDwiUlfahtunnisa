@@ -95,7 +95,7 @@ if (isset($_POST['submit'])) {
                             <?php endforeach; ?>
                         </select>
                     </div>
-                    <div class="mb-3">
+                    <!-- <div class="mb-3">
                         <label for="bulan" class="form-label">Bulan</label>
                         <select name="bulan" id="bulan" class="form-select">
                             <option selected>Pilih Bulan</option>
@@ -113,12 +113,12 @@ if (isset($_POST['submit'])) {
                             <option value="Desember">Desember</option>
 
                         </select>
-                        <!-- <input type="satuan_obat" name="satuan_obat" class="form-control" id="satuan_obat" placeholder="Masukkan Password" required> -->
-                    </div>
-                    <div class="mb-3">
+                        <input type="satuan_obat" name="satuan_obat" class="form-control" id="satuan_obat" placeholder="Masukkan Password" required>
+                    </div> -->
+                    <!-- <div class="mb-3">
                         <label for="tahun" class="form-label">Tahun</label>
                         <input type="text" name="tahun" class="form-control" id="tahun" placeholder="Masukkan Tahun" required>
-                    </div>
+                    </div> -->
                     <div class="mb-3">
                         <label for="tgl_penjualan" class="form-label">Tanggal Penjualan</label>
                         <input type="date" name="tgl_penjualan" class="form-control" id="tgl_penjualan" placeholder="Masukkan Tanggal Penjualan" required>
