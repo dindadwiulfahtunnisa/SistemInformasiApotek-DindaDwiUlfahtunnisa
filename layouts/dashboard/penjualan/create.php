@@ -125,7 +125,7 @@ if (isset($_POST['submit'])) {
                     </div>
                     <div class="mb-3">
                         <label for="jumlah" class="form-label">Jumlah</label>
-                        <input type="text" name="jumlah" class="form-control" id="jumlah" placeholder="Masukkan Jumlah" required>
+                        <input type="number" name="jumlah" class="form-control" id="jumlah" placeholder="Masukkan Jumlah" required>
                     </div>
                     <!-- <div class="mb-3">
                         <label for="supplier_id" class="form-label">Supplier</label>

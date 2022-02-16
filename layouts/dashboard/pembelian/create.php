@@ -113,7 +113,7 @@ if (isset($_POST['submit'])) {
                     </div>
                     <div class="mb-3">
                         <label for="total_pembelian" class="form-label">Total Pembelian</label>
-                        <input type="text" name="total_pembelian" class="form-control" id="total_pembelian" placeholder="Masukkan Total Pembelian" required>
+                        <input type="number" name="total_pembelian" class="form-control" id="total_pembelian" placeholder="Masukkan Total Pembelian" required>
                     </div>
 
                     <button type="submit" name="submit" class="btn btn-primary">Save</button>
