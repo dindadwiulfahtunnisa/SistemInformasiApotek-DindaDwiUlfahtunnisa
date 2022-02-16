@@ -138,7 +138,7 @@
                     <div class="sb-nav-link-icon">
                         <i class="bi bi-briefcase-fill"></i>
                     </div>
-                    Trnsaksi Penjualan
+                    Transaksi Penjualan
                 </a>
                 <a class="nav-link <?php if ($_GET['page'] == 'prediksi') echo 'active' ?>" href="index.php?page=prediksi">
                     <div class="sb-nav-link-icon">

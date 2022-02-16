@@ -32,7 +32,7 @@ if (isset($_POST['submit'])) {
     $pembelian_id       = htmlspecialchars($_POST['pembelian_id']);
     $kode_pembelian     = htmlspecialchars($_POST['kode_pembelian']);
     $obat_id            = htmlspecialchars($_POST['obat_id']);
-    $kode_obat          = htmlspecialchars($_POST['kode_obat']);
+    // $kode_obat          = htmlspecialchars($_POST['kode_obat']);
     $supplier_id        = htmlspecialchars($_POST['supplier_id']);
     $bulan              = htmlspecialchars($_POST['bulan']);
     $tahun              = htmlspecialchars($_POST['tahun']);
@@ -42,7 +42,7 @@ if (isset($_POST['submit'])) {
     $query_update = "UPDATE tbl_pembelian SET
                         kode_pembelian  = '$kode_pembelian',
                         obat_id         = '$obat_id',
-                        kode_obat       = '$kode_obat',
+                        -- kode_obat       = '$kode_obat',
                         supplier_id     = '$supplier_id',
                         bulan           = '$bulan',
                         tahun           = '$tahun',
@@ -99,8 +99,8 @@ if (isset($_POST['submit'])) {
                             <?php endforeach; ?>
                         </select>
                     </div>
-                    <?php
-                    if (!isset($pembelian['obat_id'])) : ?>
+                    <!-- <?php
+                            if (!isset($pembelian['obat_id'])) : ?>
                         <div class="mb-3">
                             <label for="kode_obat" class="form-label">Kode Obat</label>
                             <input type="text" name="kode_obat" class="form-control" id="kode_obat" value="<?= $pembelian['kode_obat'] ?>">
@@ -110,7 +110,7 @@ if (isset($_POST['submit'])) {
                             <label for="kode_obat" class="form-label">Kode Obat</label>
                             <input type="text" name="kode_obat" class="form-control" id="kode_obat" value="<?= $obat['kode_obat'] ?>" readonly>
                         </div>
-                    <?php endif ?>
+                    <?php endif ?> -->
                     <div class="mb-3">
                         <label for="supplier_id" class="form-label">Nama Supplier</label>
                         <select name="supplier_id" id="supplier_id" class="form-select" value="<?= $pembelian['supplier_id']; ?>">

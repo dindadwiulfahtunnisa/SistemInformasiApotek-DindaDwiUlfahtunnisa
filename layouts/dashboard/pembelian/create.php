@@ -17,18 +17,18 @@ $suppliers = query("SELECT * FROM tbl_supplier");
 if (isset($_POST['submit'])) {
     $kode_pembelian     = htmlspecialchars($_POST['kode_pembelian']);
     $obat_id            = htmlspecialchars($_POST['obat_id']);
-    $kode_obat          = htmlspecialchars($_POST['kode_obat']);
+    // $kode_obat          = htmlspecialchars($_POST['kode_obat']);
     $supplier_id        = htmlspecialchars($_POST['supplier_id']);
     $tgl_pembelian      = htmlspecialchars($_POST['tgl_pembelian']);
     $total_pembelian    = htmlspecialchars($_POST['total_pembelian']);
 
     $query_create = "INSERT INTO tbl_pembelian (
                         kode_pembelian, obat_id,
-                        kode_obat, supplier_id,
+                        supplier_id,
                         tgl_pembelian, total_pembelian
                         ) VALUES ( 
                             '$kode_pembelian', '$obat_id',
-                            '$kode_obat',  '$supplier_id',
+                            '$supplier_id',
                             '$tgl_pembelian', '$total_pembelian'
                             )
                     ";
@@ -92,10 +92,10 @@ if (isset($_POST['submit'])) {
                             <?php endforeach; ?>
                         </select>
                     </div>
-                    <div class="mb-3">
+                    <!-- <div class="mb-3">
                         <label for="kode_obat" class="form-label">Kode Obat</label>
                         <input type="text" name="kode_obat" class="form-control" id="kode_obat" placeholder="Masukkan Kode Obat" required>
-                    </div>
+                    </div> -->
                     <div class="mb-3">
                         <label for="supplier_id" class="form-label">Nama Supplier</label>
                         <select name="supplier_id" id="supplier_id" class="form-select" value="<?= $pembelian['supplier_id']; ?>">
