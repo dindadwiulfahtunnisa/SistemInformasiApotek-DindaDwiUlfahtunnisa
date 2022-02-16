@@ -114,6 +114,7 @@ if (isset($_POST['submit'])) {
                             <option value="Pack">Pack</option>
                             <option value="Tube">Tube</option>
                             <option value="Botol">Botol</option>
+                            <option value="Botol">Kotak</option>
 
                         </select>
                     </div>

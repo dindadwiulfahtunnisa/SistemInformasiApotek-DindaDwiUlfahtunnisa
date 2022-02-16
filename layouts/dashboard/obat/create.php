@@ -101,6 +101,7 @@ if (isset($_POST['submit'])) {
                             <option value="Pack">Pack</option>
                             <option value="Tube">Tube</option>
                             <option value="Botol">Botol</option>
+                            <option value="Botol">Kotak</option>
 
                         </select>
                         <!-- <input type="satuan_obat" name="satuan_obat" class="form-control" id="satuan_obat" placeholder="Masukkan Password" required> -->
@@ -134,7 +135,7 @@ if (isset($_POST['submit'])) {
                     </div>
                     <button type="submit" name="submit" class="btn btn-primary">Save</button>
                     <button type="reset" class="btn btn-dark">Clear</button>
-                    <a href="index.php?page=supplier" class="btn btn-secondary">Cancel</a>
+                    <a href="index.php?page=obat" class="btn btn-secondary">Cancel</a>
                 </form>
             </div>
         </div>
