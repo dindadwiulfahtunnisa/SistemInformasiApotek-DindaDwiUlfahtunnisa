@@ -32,7 +32,6 @@ if (isset($_POST['submit'])) {
     $kode_penjualan     = htmlspecialchars($_POST['kode_penjualan']);
     $obat_id            = htmlspecialchars($_POST['obat_id']);
     $bulan              = htmlspecialchars($_POST['bulan']);
-    $tahun              = htmlspecialchars($_POST['tahun']);
     $tgl_penjualan      = htmlspecialchars($_POST['tgl_penjualan']);
     $jumlah             = htmlspecialchars($_POST['jumlah']);
 
@@ -40,7 +39,6 @@ if (isset($_POST['submit'])) {
                         kode_penjualan  = '$kode_penjualan',
                         obat_id         = '$obat_id',
                         bulan           = '$bulan',
-                        tahun           = '$tahun',
                         tgl_penjualan   = '$tgl_penjualan',
                         jumlah          = '$jumlah'
                     WHERE penjualan_id  = '$penjualan_id'
@@ -114,10 +112,6 @@ if (isset($_POST['submit'])) {
                             <option value="November">November</option>
                             <option value="Desember">Desember</option>
                         </select>
-                    </div>
-                    <div class="mb-3">
-                        <label for="tahun" class="form-label">Tahun</label>
-                        <input type="text" name="tahun" class="form-control" id="tahun" value="<?= $penjualan['tahun'] ?>" required>
                     </div>
                     <div class="mb-3">
                         <label for="tgl_penjualan" class="form-label">Tanggal Penjualan</label>
