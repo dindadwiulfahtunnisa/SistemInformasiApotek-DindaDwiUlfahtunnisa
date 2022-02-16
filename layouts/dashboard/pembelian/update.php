@@ -134,27 +134,6 @@ if (isset($_POST['submit'])) {
                         </div>
                     <?php endif ?>
                     <div class="mb-3">
-                        <label for="bulan" class="form-label">Bulan</label>
-                        <select name="bulan" id="bulan" class="form-select" value="<?= $pembelian['bulan'] ?>">
-                            <option value="Januari">Januari</option>
-                            <option value="Februari">Februari</option>
-                            <option value="Maret">Maret</option>
-                            <option value="April">April</option>
-                            <option value="Mei">Mei</option>
-                            <option value="Juni">Juni</option>
-                            <option value="Juli">Juli</option>
-                            <option value="Agustus">Agustus</option>
-                            <option value="September">September</option>
-                            <option value="Oktober">Oktober</option>
-                            <option value="November">November</option>
-                            <option value="Desember">Desember</option>
-                        </select>
-                    </div>
-                    <div class="mb-3">
-                        <label for="tahun" class="form-label">Tahun</label>
-                        <input type="text" name="tahun" class="form-control" id="tahun" value="<?= $pembelian['tahun'] ?>" required>
-                    </div>
-                    <div class="mb-3">
                         <label for="tgl_pembelian" class="form-label">Tanggal Pembelian</label>
                         <input type="date" name="tgl_pembelian" class="form-control" id="tgl_pembelian" value="<?= $pembelian['tgl_pembelian'] ?>" required>
                     </div>
