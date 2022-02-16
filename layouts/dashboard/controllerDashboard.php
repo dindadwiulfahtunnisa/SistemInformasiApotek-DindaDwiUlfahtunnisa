@@ -129,6 +129,10 @@ switch ($page) {
         include "prediksi/delete.php";
         break;
 
+    case 'cetak_laporan':
+        include "prediksi/cetak.php";
+        break;
+
     default: // Ini untuk set default jika isi dari $page tidak ada
         include "dashboard.php";
 }

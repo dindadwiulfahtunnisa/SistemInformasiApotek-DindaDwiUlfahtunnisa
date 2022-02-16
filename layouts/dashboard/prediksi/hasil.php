@@ -27,7 +27,8 @@ $no = 1
                 Table Data Prediksi
             </div>
             <div class="card-body border-0">
-                <a href="?page=prediksi" class="btn btn-sm btn-primary mb-3">Add Prediksi</a>
+                <a href="?page=prediksi" class="btn btn-sm btn-primary mb-3"><i class="fa fa-plus mr-2"></i>Add Prediksi</a>
+                <a href="prediksi/cetak.php" class="btn btn-sm btn-info mb-3 text-white" target="_blank"><i class="fa fa-print mr-2"></i>Cetak Laporan</a>
 
                 <table class="table table-bordered table-hover table-responsive-sm text-center rounded">
                     <thead class="table-dark">
