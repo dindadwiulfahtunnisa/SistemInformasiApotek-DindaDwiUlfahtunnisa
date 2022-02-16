@@ -117,8 +117,8 @@ switch ($page) {
         include "prediksi/index.php";
         break;
 
-    case 'prediksi/create':
-        include "prediksi/create.php";
+    case 'prediksi/listview':
+        include "prediksi/hasil.php";
         break;
 
     case 'prediksi/update':

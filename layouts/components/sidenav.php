@@ -50,6 +50,12 @@
                     </div>
                     Prediksi
                 </a>
+                <a class="nav-link <?php if ($_GET['page'] == 'prediksi/listview') echo 'active' ?>" href="index.php?page=prediksi/listview">
+                    <div class="sb-nav-link-icon">
+                        <i class="bi bi-bar-chart-line-fill"></i>
+                    </div>
+                    Hasil
+                </a>
 
             <?php elseif ($_SESSION['role_id'] == 2) : ?>
                 <a class="nav-link <?php if ($_GET['page'] == 'roles') echo 'active' ?>" href="index.php?page=roles">

@@ -12,40 +12,58 @@ require '../../config/config.php';
 $roles = query("SELECT * FROM roles");
 
 if (isset($_POST['submit'])) {
-    $role_level = htmlspecialchars($_POST['role_level']);
+    $obat       = htmlspecialchars($_POST['obat']);
+    $periode    = htmlspecialchars($_POST['periode']);
 
-    $query_create = "INSERT INTO roles (role_level) 
-                        VALUES ('$role_level')";
+    // kode prediksi
+    $no = $conn->query("SELECT * FROM tbl_prediksi");
+    $getNo = mysqli_num_rows($no);
+    $rows = $getNo + 1;
+    $kode = 'PR' . 00 . $rows;
 
-    // Cek apakah roles level sudah ada di database
-    $level_checker = "SELECT * FROM roles WHERE role_level='$role_level'";
-    $check = mysqli_query($conn, $level_checker) or die(mysqli_error($conn));
+    $data = $conn->query("SELECT penjualan_id, bulan, tahun FROM tbl_penjualan ORDER BY penjualan_id DESC LIMIT 1")->fetch_assoc();
 
-    if (mysqli_num_rows($check) == 0) {
-        $create = mysqli_query($conn, $query_create) or die(mysqli_error($conn));
+    $exId   = $data['penjualan_id'];
+    $bulan  = $data['bulan'];
+    $tahun  = $data['tahun'];
 
-        if ($create) {
-            echo '
+    // hitung jumlah penjualan berdasarkan pilihan periode terakhir
+    $query_sum  = mysqli_query($conn, "SELECT SUM(jumlah) as total FROM tbl_penjualan WHERE penjualan_id != $exId ORDER BY penjualan_id DESC LIMIT $periode")->fetch_assoc();
+    $jumlah     = $query_sum['total'];
+
+    // cek jumlah baris
+    $query_row = mysqli_query($conn, "SELECT * FROM tbl_penjualan");
+    $row    = mysqli_num_rows($query_row);
+    $baris  = $row - 1;
+
+    // cek nilai penjualan pada periode tersebut
+    $cekJumlah = $conn->query("SELECT jumlah FROM tbl_penjualan WHERE penjualan_id = $exId")->fetch_assoc();
+
+    $at     = $cekJumlah['jumlah'];
+    $fc     = $jumlah / $baris;
+    $error  = $fc - $at;
+    $mad    = abs($fc - $at);
+    $mse    = pow($mad, 2);
+    $mape   = $mad / $at * 100;
+
+    $query_create = "INSERT INTO tbl_prediksi (kode_ramalan, periode, jumlah, obat_id, bulan, tahun, hasil, error, mad, mse, mape) VALUES ('$kode','$periode','$at','$obat', '$bulan','$tahun','$fc', '$error','$mad','$mse','$mape')";
+
+    $create = mysqli_query($conn, $query_create) or die(mysqli_error($conn));
+
+    if ($create) {
+        echo '
                 <script>
-                    alert("Successfully added new Role Level!");
-                    document.location="index.php?page=prediksi";
+                    alert("Successfully added new forecasting!");
+                    document.location="index.php?page=hasil";
                 </script>
             ';
-        } else {
-            echo '
-                <script>
-                    alert("Failed add new Role Level!");
-                    document.location="index.php?page=prediksi";
-                </script>
-            ';
-        }
     } else {
         echo '
-            <script>
-                alert("Use another Role Level!");
-                document.location="index.php?page=prediksi/create";
-             </script>
-        ';
+                <script>
+                    alert("Failed add new forecasting!");
+                    document.location="index.php?page=hasil";
+                </script>
+            ';
     }
 }
 
@@ -60,12 +78,13 @@ if (isset($_POST['submit'])) {
 
         <div class="row gx-5 py-md-5 justify-content-center">
             <div class="col-md-4 py-md-4">
-                <form class="form-container py-md-4" action="index.php?page=roles/create" method="POST">
+                <form class="form-container py-md-4" action="index.php?page=prediksi" method="POST">
                     <div class="mb-3">
-                        <label for="obat_id" class="form-label">Nama Obat</label>
-                        <select name="obat_id" id="obat_id" class="form-select" value="<?= $prediksi['obat_id']; ?>">
+                        <label for="obat" class="form-label">Nama Obat</label>
+                        <select name="obat" id="obat" class="form-select">
                             <option selected>Pilih Obat</option>
-                            <?php foreach ($obats as $obat) : ?>
+                            <?php $data = $conn->query("SELECT * FROM tbl_obat"); ?>
+                            <?php foreach ($data as $obat) : ?>
                                 <option value="<?= $obat['obat_id'] ?>">
                                     <?= $obat['nama_obat'] ?>
                                 </option>
@@ -73,14 +92,16 @@ if (isset($_POST['submit'])) {
                         </select>
                     </div>
                     <div class="mb-3">
-                        <label for="obat_id" class="form-label">Nilai Moving Average</label>
-                        <select name="obat_id" id="obat_id" class="form-select" value="<?= $prediksi['obat_id']; ?>">
+                        <label for="periode" class="form-label">Nilai Moving Average</label>
+                        <select name="periode" id="periode" class="form-select">
                             <option selected>Pilih Nilai</option>
-                            <?php foreach ($obats as $obat) : ?>
-                                <option value="<?= $obat['obat_id'] ?>">
-                                    <?= $obat['nama_obat'] ?>
+                            <?php
+                            for ($i = 3; $i <= 11; $i++) { ?>
+                                <option value="<?= $i ?>">
+                                    Periode Ke - <?= $i ?>
                                 </option>
-                            <?php endforeach; ?>
+                            <?php } ?>
+
                         </select>
                     </div>
                     <button type="submit" name="submit" class="btn btn-primary">Hitung</button>

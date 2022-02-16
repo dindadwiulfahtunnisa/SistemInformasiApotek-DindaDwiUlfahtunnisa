@@ -1,13 +1,14 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1
+-- version 4.9.5
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Feb 12, 2022 at 04:31 AM
--- Server version: 10.4.21-MariaDB
--- PHP Version: 7.4.24
+-- Host: localhost:3306
+-- Generation Time: Feb 16, 2022 at 04:11 PM
+-- Server version: 5.7.24
+-- PHP Version: 7.2.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -65,7 +66,7 @@ CREATE TABLE `tbl_obat` (
 --
 
 INSERT INTO `tbl_obat` (`obat_id`, `kode_obat`, `nama_obat`, `kedaluwarsa`, `harga_beli`, `harga_jual`, `satuan_obat`, `stok`, `supplier_id`) VALUES
-(10, 'OB001', 'Bodrek', '2022-02-03', 10000, 7000, 'Tablet', 15, 1);
+(1, 'OB001', 'Tempra Syrup 30 ml', '2022-04-03', 15000, 24000, 'Botol', 55, 1);
 
 -- --------------------------------------------------------
 
@@ -90,7 +91,7 @@ CREATE TABLE `tbl_pembelian` (
 --
 
 INSERT INTO `tbl_pembelian` (`pembelian_id`, `kode_pembelian`, `obat_id`, `kode_obat`, `supplier_id`, `bulan`, `tahun`, `tgl_pembelian`, `total_pembelian`) VALUES
-(1, 'PB001', 10, 'OB001', 1, 'Januari', 2022, '2022-02-05', 4);
+(1, 'PB001', 1, 'OB001', 1, 'Januari', 2022, '2022-02-05', 55);
 
 -- --------------------------------------------------------
 
@@ -102,7 +103,7 @@ CREATE TABLE `tbl_penjualan` (
   `penjualan_id` int(11) NOT NULL,
   `kode_penjualan` varchar(10) NOT NULL,
   `obat_id` int(11) NOT NULL,
-  `bulan` varchar(11) NOT NULL,
+  `bulan` int(11) NOT NULL,
   `tahun` year(4) NOT NULL,
   `tgl_penjualan` date NOT NULL,
   `jumlah` int(11) NOT NULL
@@ -113,7 +114,11 @@ CREATE TABLE `tbl_penjualan` (
 --
 
 INSERT INTO `tbl_penjualan` (`penjualan_id`, `kode_penjualan`, `obat_id`, `bulan`, `tahun`, `tgl_penjualan`, `jumlah`) VALUES
-(1, 'P002', 10, 'Januari', 2022, '2022-02-19', 3);
+(1, 'P001', 1, 1, 2021, '2022-01-19', 51),
+(2, 'P002', 1, 2, 2021, '2021-02-16', 69),
+(3, 'P003', 1, 3, 2021, '2021-03-16', 57),
+(4, 'P004', 1, 4, 2021, '2021-04-16', 60),
+(7, 'P005', 1, 5, 2021, '2021-05-16', 25);
 
 -- --------------------------------------------------------
 
@@ -123,13 +128,26 @@ INSERT INTO `tbl_penjualan` (`penjualan_id`, `kode_penjualan`, `obat_id`, `bulan
 
 CREATE TABLE `tbl_prediksi` (
   `ramalan_id` int(11) NOT NULL,
-  `kode_ramalan` int(11) NOT NULL,
+  `kode_ramalan` varchar(10) NOT NULL,
+  `periode` int(11) NOT NULL,
+  `jumlah` int(11) NOT NULL,
   `obat_id` int(11) NOT NULL,
-  `kode_obat` int(11) NOT NULL,
-  `bulan` varchar(10) NOT NULL,
+  `bulan` int(11) NOT NULL,
   `tahun` year(4) NOT NULL,
-  `hasil` double NOT NULL
+  `hasil` double NOT NULL,
+  `error` float NOT NULL,
+  `mad` float NOT NULL,
+  `mse` double NOT NULL,
+  `mape` float NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `tbl_prediksi`
+--
+
+INSERT INTO `tbl_prediksi` (`ramalan_id`, `kode_ramalan`, `periode`, `jumlah`, `obat_id`, `bulan`, `tahun`, `hasil`, `error`, `mad`, `mse`, `mape`) VALUES
+(1, 'PR01', 3, 60, 1, 4, 2021, 59, -1, 1, 1, 1.66667),
+(4, 'PR02', 4, 25, 1, 5, 2021, 59.25, 34.25, 34.25, 1173.0625, 137);
 
 -- --------------------------------------------------------
 
@@ -252,7 +270,13 @@ ALTER TABLE `tbl_pembelian`
 -- AUTO_INCREMENT for table `tbl_penjualan`
 --
 ALTER TABLE `tbl_penjualan`
-  MODIFY `penjualan_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `penjualan_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT for table `tbl_prediksi`
+--
+ALTER TABLE `tbl_prediksi`
+  MODIFY `ramalan_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `tbl_supplier`

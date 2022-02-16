@@ -31,8 +31,8 @@ $no = 1;
                         <th scope="col">Nama Obat</th>
                         <!-- <th scope="col">Bulan</th>
                         <th scope="col">Tahun</th> -->
-                        <th scope="col">Tanggal Penjualan</th>
-                        <th scope="col">Jumlah</th>
+                        <th scope="col">Penjualan</th>
+                        <th scope="col">Qty</th>
                         <th scope="col">Actions</th>
                     </thead>
                     <tbody>
@@ -44,8 +44,8 @@ $no = 1;
                                 <td><?= $penjualan['nama_obat']; ?></td>
                                 <!-- <td><?= $penjualan['bulan']; ?></td>
                                 <td><?= $penjualan['tahun']; ?></td> -->
-                                <td><?= $penjualan['tgl_penjualan']; ?></td>
-                                <td><?= $penjualan['jumlah']; ?></td>
+                                <td><?= TanggalIndo($penjualan['tgl_penjualan']); ?></td>
+                                <td><?= $penjualan['jumlah'] ?> <?= $penjualan['satuan_obat'] ?></td>
                                 <td>
                                     <a href="index.php?page=penjualan/update&id=<?= $penjualan['penjualan_id'] ?>" class="btn btn-sm btn-warning">Edit</a>
                                     <a href="index.php?page=penjualan/delete&id=<?= $penjualan['penjualan_id'] ?>" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure to delete Penjualan?')">Delete</a>

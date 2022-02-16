@@ -32,12 +32,12 @@ $no = 1;
                         <!-- <th scope="col">ID Pembelian</th> -->
                         <th scope="col">Kode Pembelian</th>
                         <!-- <th scope="col">ID Obat</th> -->
-                        <th scope="col">Nama Obat</th>
                         <th scope="col">Kode Obat</th>
+                        <th scope="col">Nama Obat</th>
                         <!-- <th scope="col">ID Supplier</th> -->
-                        <th scope="col">Nama Supplier</th>
+                        <th scope="col">Supplier</th>
                         <th scope="col">Tanggal Pembelian</th>
-                        <th scope="col">Total Pembelian</th>
+                        <th scope="col">Qty</th>
                         <th scope="col">Actions</th>
                     </thead>
                     <tbody>
@@ -46,12 +46,12 @@ $no = 1;
                                 <td><?= $no++; ?></td>
                                 <!-- <td><?= $pembelian['pembelian_id']; ?></td> -->
                                 <td><?= $pembelian['kode_pembelian']; ?></td>
-                                <!-- <td><?= $pembelian['obat_id']; ?></td> -->
-                                <td><?= $pembelian['nama_obat']; ?></td>
                                 <td><?= $pembelian['kode_obat']; ?></td>
+                                <td><?= $pembelian['nama_obat']; ?></td>
+                                <!-- <td><?= $pembelian['obat_id']; ?></td> -->
                                 <!-- <td><?= $pembelian['supplier_id']; ?></td> -->
                                 <td><?= $pembelian['nama_supplier']; ?></td>
-                                <td><?= $pembelian['tgl_pembelian']; ?></td>
+                                <td><?= TanggalIndo($pembelian['tgl_pembelian']); ?></td>
                                 <td><?= $pembelian['total_pembelian']; ?></td>
                                 <td>
                                     <!-- <a href="index.php?page=pembelian/detail&id=<?= $pembelian['pembelian_id'] ?>" class="btn btn-sm btn-dark">Detail</a> -->
