@@ -6,7 +6,7 @@
             <div class="row gx-5 justify-content-center">
                 <div class="col-lg-6">
                     <div class="text-center my-5">
-                        <h2 class="display-5 fw-bolder text-white mb-2">APLIKASI SALES FORECASTING</h2>
+                        <h1 class="display-5 fw-bolder text-white mb-2">APLIKASI SALES FORECASTING</h1>
                         <br>
                         <h1 class="display-5 fw-bolder text-white mb-2">Apotek Ruhul J</h1>
                         <p class="lead text-white-50 mb-4">Jln Pagambiran No.10B</p>
