@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.5
+-- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost:3306
--- Generation Time: Feb 16, 2022 at 04:11 PM
--- Server version: 5.7.24
--- PHP Version: 7.2.6
+-- Host: 127.0.0.1
+-- Generation Time: Feb 24, 2022 at 03:20 AM
+-- Server version: 10.4.21-MariaDB
+-- PHP Version: 7.4.24
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -66,7 +65,17 @@ CREATE TABLE `tbl_obat` (
 --
 
 INSERT INTO `tbl_obat` (`obat_id`, `kode_obat`, `nama_obat`, `kedaluwarsa`, `harga_beli`, `harga_jual`, `satuan_obat`, `stok`, `supplier_id`) VALUES
-(1, 'OB001', 'Tempra Syrup 30 ml', '2022-04-03', 15000, 24000, 'Botol', 55, 1);
+(16, 'OB01', 'Tempra Syr 60 ml', '2024-07-11', 21500, 24000, 'Botol', 20, 7),
+(17, 'OB02', 'Bodrek', '2025-02-10', 4500, 7000, 'Botol', 150, 5),
+(18, 'OB03', 'Contrexin', '2025-04-04', 5500, 8000, 'Botol', 40, 5),
+(19, 'OB04', 'Neu Rheumacyl', '2025-01-01', 8500, 10000, 'Strip', 90, 5),
+(20, 'OB05', 'Hemaviton Stamina', '2025-05-24', 5000, 7500, 'Strip', 120, 5),
+(21, 'OB06', 'Sanmol Syr', '2025-08-26', 13000, 16000, 'Botol', 80, 6),
+(22, 'OB07', 'Sanmol Tablet', '2023-12-09', 5000, 2000, 'Strip', 250, 6),
+(23, 'OB08', 'Pasquam', '2024-06-25', 30000, 33000, 'Tube', 90, 6),
+(24, 'OB09', 'Sanvita Syr', '2024-03-02', 16050, 18000, 'Botol', 55, 6),
+(25, 'OB010', 'Proris Syr', '2026-01-14', 25500, 29000, 'Tablet', 40, 5),
+(28, 'OB011', 'Polysilane Syr', '2025-01-10', 22500, 25000, 'Botol', 75, 7);
 
 -- --------------------------------------------------------
 
@@ -91,7 +100,11 @@ CREATE TABLE `tbl_pembelian` (
 --
 
 INSERT INTO `tbl_pembelian` (`pembelian_id`, `kode_pembelian`, `obat_id`, `kode_obat`, `supplier_id`, `bulan`, `tahun`, `tgl_pembelian`, `total_pembelian`) VALUES
-(1, 'PB001', 1, 'OB001', 1, 'Januari', 2022, '2022-02-05', 55);
+(2, 'PB001', 16, 'OB01', 5, '', 0000, '2021-02-18', 1000),
+(4, 'PB002', 17, '', 5, '', 0000, '2021-01-01', 1000),
+(5, 'PB003', 18, '', 5, '', 0000, '2021-02-18', 1000),
+(6, 'PB004', 23, '', 6, '', 0000, '2021-01-10', 1000),
+(7, 'P005', 25, '', 7, '', 0000, '2021-04-22', 1000);
 
 -- --------------------------------------------------------
 
@@ -114,11 +127,17 @@ CREATE TABLE `tbl_penjualan` (
 --
 
 INSERT INTO `tbl_penjualan` (`penjualan_id`, `kode_penjualan`, `obat_id`, `bulan`, `tahun`, `tgl_penjualan`, `jumlah`) VALUES
-(1, 'P001', 1, 1, 2021, '2022-01-19', 51),
-(2, 'P002', 1, 2, 2021, '2021-02-16', 69),
-(3, 'P003', 1, 3, 2021, '2021-03-16', 57),
-(4, 'P004', 1, 4, 2021, '2021-04-16', 60),
-(7, 'P005', 1, 5, 2021, '2021-05-16', 25);
+(19, 'P001', 16, 1, 0000, '2021-01-13', 51),
+(20, 'P002', 16, 1, 0000, '2021-02-16', 69),
+(21, 'P003', 16, 1, 0000, '2021-03-18', 57),
+(22, 'P004', 16, 1, 0000, '2021-04-15', 60),
+(23, 'P005', 16, 1, 0000, '2021-05-16', 25),
+(24, 'P006', 16, 0, 0000, '2021-06-30', 30),
+(26, 'P007', 16, 0, 0000, '2021-07-28', 55),
+(27, 'P008', 16, 0, 0000, '2021-08-05', 48),
+(28, 'P009', 16, 0, 0000, '2021-09-15', 59),
+(29, 'P010', 16, 0, 0000, '2021-10-08', 35),
+(31, 'P012', 16, 0, 0000, '2021-12-12', 36);
 
 -- --------------------------------------------------------
 
@@ -146,8 +165,8 @@ CREATE TABLE `tbl_prediksi` (
 --
 
 INSERT INTO `tbl_prediksi` (`ramalan_id`, `kode_ramalan`, `periode`, `jumlah`, `obat_id`, `bulan`, `tahun`, `hasil`, `error`, `mad`, `mse`, `mape`) VALUES
-(1, 'PR01', 3, 60, 1, 4, 2021, 59, -1, 1, 1, 1.66667),
-(4, 'PR02', 4, 25, 1, 5, 2021, 59.25, 34.25, 34.25, 1173.0625, 137);
+(14, 'PR01', 3, 29, 16, 1, 0000, 48.9, 19.9, 19.9, 396.01, 68.6207),
+(21, 'PR02', 4, 36, 16, 0, 0000, 48.9, 12.9, 12.9, 166.41, 35.8333);
 
 -- --------------------------------------------------------
 
@@ -168,8 +187,9 @@ CREATE TABLE `tbl_supplier` (
 --
 
 INSERT INTO `tbl_supplier` (`supplier_id`, `kode_supplier`, `nama_supplier`, `alamat`, `nohp`) VALUES
-(1, 'SUP001', 'PT. KIMIA FARMA', 'Jalan Sawahan No. 2', '082268266265'),
-(4, 'SUP002', 'PT. RATULANGI', 'Pagambiran', '012301974109');
+(5, 'SUP01', 'PT. TEMPO', 'Ulak Karang', '082268266264'),
+(6, 'SUP02', 'PT. BINA SAN PRIMA', 'Kuranji', '085263664777'),
+(7, 'SUP03', 'PT. PARIT PADANG', 'Korong Gadang, Kuranji', '082268234567');
 
 -- --------------------------------------------------------
 
@@ -191,8 +211,9 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`user_id`, `username`, `fullname`, `password`, `role_id`) VALUES
 (3, 'developer', 'Dinda Dwi Ulfahtunnisa', 'developer', 1),
-(4, 'runi', 'Runi', 'runi', 4),
-(16, 'ruhul', 'Ruhul J', 'ruhul', 3);
+(18, 'pemilik', 'Ruhul J', 'pemilik', 2),
+(19, 'apoteker', 'Intan Kumalasari', 'apoteker', 3),
+(20, 'karyawan', 'Afriyani', 'karyawan', 4);
 
 --
 -- Indexes for dumped tables
@@ -258,37 +279,37 @@ ALTER TABLE `roles`
 -- AUTO_INCREMENT for table `tbl_obat`
 --
 ALTER TABLE `tbl_obat`
-  MODIFY `obat_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `obat_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT for table `tbl_pembelian`
 --
 ALTER TABLE `tbl_pembelian`
-  MODIFY `pembelian_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `pembelian_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `tbl_penjualan`
 --
 ALTER TABLE `tbl_penjualan`
-  MODIFY `penjualan_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `penjualan_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- AUTO_INCREMENT for table `tbl_prediksi`
 --
 ALTER TABLE `tbl_prediksi`
-  MODIFY `ramalan_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `ramalan_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `tbl_supplier`
 --
 ALTER TABLE `tbl_supplier`
-  MODIFY `supplier_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `supplier_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- Constraints for dumped tables
