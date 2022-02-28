@@ -50,7 +50,7 @@
             $hMad  = $ambil['mad'] / $tMad;
             $hMse  = $ambil['mse'] / $tMse;
             $hMape = $ambil['mape'] / $tMape;
-            $query = $conn->query("SELECT * FROM tbl_prediksi");
+            $query = $conn->query("SELECT * FROM tbl_prediksi ORDER BY bulan ASC");
             foreach ($query as $no => $a) :
                 if ($a['hasil'] == '') {
                     $cHasil = '-';
