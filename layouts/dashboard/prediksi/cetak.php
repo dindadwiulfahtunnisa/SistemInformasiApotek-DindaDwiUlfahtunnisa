@@ -105,8 +105,8 @@
         <p>Hasil Prediksi :</p>
         <table border="1" width="20%" cellspacing="8" style="margin-top: 20px; border-collapse: collapse;" class="date" id="thtd">
             <?php
-            $hsl = $conn->query("SELECT hasil, tahun FROM tbl_prediksi WHERE bulan = 12")->fetch_assoc();
-            $hpTahun    = $hsl['tahun'];
+            $hsl = $conn->query("SELECT hasil, bulan FROM tbl_prediksi WHERE bulan = 12")->fetch_assoc();
+            $hpTahun    = bulan($hsl['bulan']);
             $hpFt       = $hsl['hasil'];
             ?>
             <tr>
