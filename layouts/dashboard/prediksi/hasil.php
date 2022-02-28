@@ -46,7 +46,7 @@ $hMape = $ambil['mape'] / $tMape;
                         <th scope="col" width="3%">No.</th>
                         <th scope="col" width="10%">Bulan</th>
                         <th scope="col" width="10%">Terjual (At)</th>
-                        <th scope="col" width="10%">Periode</th>
+                        <!-- <th scope="col" width="10%">Periode</th> -->
                         <th scope="col" width="10%">Average</th>
                         <th scope="col">Error</th>
                         <th scope="col">MAD</th>
@@ -91,7 +91,7 @@ $hMape = $ambil['mape'] / $tMape;
                                 <td><?= $no + 1; ?></td>
                                 <td><?= bulan($a['bulan']); ?></td>
                                 <td><?= $cjumlah; ?></td>
-                                <td><?= $a['periode']; ?></td>
+                                <!-- <td><?= $a['periode']; ?></td> -->
                                 <td><?= round($cHasil, 3); ?>
                                 <td><?= round($cError, 3) ?></td>
                                 <td><?= round($cmad, 3) ?></td>
@@ -102,7 +102,7 @@ $hMape = $ambil['mape'] / $tMape;
                     </tbody>
                     <tfoot>
                         <tr>
-                            <th colspan="6">Jumlah Nilai Error</th>
+                            <th colspan="5">Jumlah Nilai Error</th>
                             <th><?= round($hMad, 3) ?></th>
                             <th><?= round($hMse, 3) ?></th>
                             <th><?= round($hMape, 3) ?></th>
