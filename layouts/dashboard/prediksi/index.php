@@ -12,6 +12,7 @@ require '../../config/config.php';
 $roles = query("SELECT * FROM roles");
 
 if (isset($_POST['submit'])) {
+    $truncate = $conn->query('DELETE FROM tbl_prediksi');
     $obat       = htmlspecialchars($_POST['obat']);
     $periode    = htmlspecialchars($_POST['periode']);
 
@@ -27,33 +28,36 @@ if (isset($_POST['submit'])) {
         $end    = $periode++;
         $prd = 3;
 
-
         // cek nilai penjualan pada periode tersebut
         $cekJumlah = $conn->query("SELECT jumlah FROM tbl_penjualan WHERE penjualan_id = $exId")->fetch_assoc();
         $jumlah = $cekJumlah['jumlah'];
 
-
-        // $awal = $bulan < 4;
-
         if ($bulan < 4) {
             $query = $conn->query("INSERT INTO tbl_prediksi (periode, jumlah, obat_id, bulan, tahun) VALUES ('$prd','$jumlah','$obat', '$bulan','$tahun')");
         }
-        if ($periode <= 12) {
+        if ($periode <= 11) {
             $query_sum  = $conn->query("SELECT SUM(jumlah) as total FROM tbl_penjualan WHERE MONTH(tgl_penjualan) BETWEEN $start AND $end")->fetch_assoc();
-            $cekJumlah2 = $conn->query("SELECT jumlah FROM tbl_penjualan WHERE MONTH(tgl_penjualan) = '$periode'")->fetch_assoc();
-            // $jumlah = $cekJumlah['jumlah'];
             $total  = $query_sum['total'];
+            $cekJumlah2 = $conn->query("SELECT jumlah FROM tbl_penjualan WHERE MONTH(tgl_penjualan) = '$periode'")->fetch_assoc();
             $at     = $cekJumlah2['jumlah'];
+
             $hasil  = $total / 3;
             $error  = $hasil - $at;
             $mad    = abs($hasil - $at);
             $mse    = pow($mad, 2);
             $mape   = ($mad / $at) * 100;
-            // echo "<pre>";
-            // echo $periode;
-            // var_dump($mape);
-            // echo "</pre>";
-            $query2 = $conn->query("INSERT INTO tbl_prediksi (periode, jumlah, obat_id, bulan, tahun, hasil, error, mad, mse, mape) VALUES ('$prd','$jumlah','$obat', '$periode','$tahun','$hasil', '$error','$mad','$mse','$mape')");
+            $query2 = $conn->query("INSERT INTO tbl_prediksi (periode, jumlah, obat_id, bulan, tahun, hasil, error, mad, mse, mape) VALUES ('$prd','$at','$obat', '$periode','$tahun','$hasil', '$error','$mad','$mse','$mape')");
+        }
+        if ($periode == 12) {
+            $sum_jumlah  = $conn->query("SELECT SUM(jumlah) as total FROM tbl_penjualan WHERE MONTH(tgl_penjualan) BETWEEN 09 AND 11")->fetch_assoc();
+            $total_sum  = $sum_jumlah['total'];
+            $avg = $total_sum / 3;
+            $sum  = $conn->query("SELECT SUM(mad) as total_mad, SUM(mse) as total_mse, SUM(mape) as total_mape FROM tbl_prediksi")->fetch_assoc();
+            $total_mad  = $sum['total_mad'];
+            $total_mse  = $sum['total_mse'];
+            $total_mape = $sum['total_mape'];
+
+            $query3 = $conn->query("INSERT INTO tbl_prediksi (periode, obat_id, bulan, tahun, hasil, mad, mse, mape) VALUES ('$prd','$obat', '$periode','$tahun','$avg','$total_mad','$total_mse','$total_mape')");
         }
 
         if ($query2) {

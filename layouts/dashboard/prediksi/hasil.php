@@ -10,7 +10,18 @@ if (!isset($_SESSION['login'])) {
 require '../../config/config.php';
 
 $query = query("SELECT * FROM tbl_prediksi ORDER BY bulan ASC");
-// $no = 1
+
+
+$count = $conn->query("SELECT COUNT(mad) as mad, COUNT(mse) as mse, COUNT(mape) as mape from tbl_prediksi")->fetch_assoc();
+$tMad  = $count['mad'] - 1;
+$tMse  = $count['mse'] - 1;
+$tMape = $count['mape'] - 1;
+
+$ambil = $conn->query("SELECT mad, mse, mape FROM tbl_prediksi WHERE bulan = 12")->fetch_assoc();
+$hMad  = $ambil['mad'] / $tMad;
+$hMse  = $ambil['mse'] / $tMse;
+$hMape = $ambil['mape'] / $tMape;
+// var_dump($ambil);
 
 ?>
 <title>Prediksi</title>
@@ -41,7 +52,6 @@ $query = query("SELECT * FROM tbl_prediksi ORDER BY bulan ASC");
                         <th scope="col">MAD</th>
                         <th scope="col">MSE</th>
                         <th scope="col">MAPE</th>
-                        <!-- <th scope="col">Actions</th> -->
                     </thead>
                     <tbody>
                         <?php foreach ($query as $no => $a) : ?>
@@ -71,24 +81,33 @@ $query = query("SELECT * FROM tbl_prediksi ORDER BY bulan ASC");
                             } else {
                                 $cmape = $a['mape'];
                             }
+                            if ($a['jumlah'] == '') {
+                                $cjumlah = '-';
+                            } else {
+                                $cjumlah = $a['jumlah'];
+                            }
                             ?>
                             <tr>
                                 <td><?= $no + 1; ?></td>
                                 <td><?= bulan($a['bulan']); ?></td>
-                                <td><?= $a['jumlah']; ?></td>
+                                <td><?= $cjumlah; ?></td>
                                 <td><?= $a['periode']; ?></td>
-                                <td><?= $cHasil; ?>
-                                <td><?= $cError ?></td>
-                                <td><?= $cmad ?></td>
-                                <td><?= $cmse ?></td>
-                                <td><?= $cmape ?></td>
-                                <!-- <td>
-                                    <a href="index.php?page=users/update&id=<?= $user['user_id'] ?>" class="btn btn-sm btn-warning">Edit</a>
-                                    <a href="index.php?page=users/delete&id=<?= $user['user_id'] ?>" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure to delete user?')">Delete</a>
-                                </td> -->
+                                <td><?= round($cHasil, 3); ?>
+                                <td><?= round($cError, 3) ?></td>
+                                <td><?= round($cmad, 3) ?></td>
+                                <td><?= round($cmse, 3) ?></td>
+                                <td><?= round($cmape, 3) ?></td>
                             </tr>
                         <?php endforeach; ?>
                     </tbody>
+                    <tfoot>
+                        <tr>
+                            <th colspan="6">Jumlah Nilai Error</th>
+                            <th><?= round($hMad, 3) ?></th>
+                            <th><?= round($hMse, 3) ?></th>
+                            <th><?= round($hMape, 3) ?></th>
+                        </tr>
+                    </tfoot>
                 </table>
             </div>
         </div>
