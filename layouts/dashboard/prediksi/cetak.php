@@ -41,14 +41,15 @@
             <?php
             // $no = 1;
             include "../../../config/config.php";
-            $getBulan = $conn->query("SELECT bulan FROM tbl_prediksi ORDER BY bulan DESC LIMIT 1")->fetch_assoc();
+            $getBulan = $conn->query("SELECT bulan, obat_id FROM tbl_prediksi ORDER BY bulan DESC LIMIT 1")->fetch_assoc();
             $lastBulan = $getBulan['bulan'];
+            $obat       = $getBulan['obat_id'];
             $count = $conn->query("SELECT COUNT(mad) as mad, COUNT(mse) as mse, COUNT(mape) as mape from tbl_prediksi")->fetch_assoc();
             $tMad  = $count['mad'] - 1;
             $tMse  = $count['mse'] - 1;
             $tMape = $count['mape'] - 1;
 
-            $ambil = $conn->query("SELECT mad, mse, mape FROM tbl_prediksi WHERE bulan = $lastBulan")->fetch_assoc();
+            $ambil = $conn->query("SELECT mad, mse, mape FROM tbl_prediksi WHERE bulan = $lastBulan AND obat_id = $obat")->fetch_assoc();
             $hMad  = $ambil['mad'] / $tMad;
             $hMse  = $ambil['mse'] / $tMse;
             $hMape = $ambil['mape'] / $tMape;
