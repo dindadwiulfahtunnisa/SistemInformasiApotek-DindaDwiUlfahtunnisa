@@ -31,7 +31,7 @@ if ($status == 'notlogin') {
                 <form class="form-container py-md-4" action="config/functionLogin.php" method="POST">
                     <div class="mb-5">
                         <label for="username" class="form-label text-white">Username</label>
-                        <input type="text" name="username" class="form-control" id="username" required>
+                        <input type="text" name="username" class="form-control" id="username" required autofocus>
                     </div>
                     <div class="mb-5">
                         <label for="password" class="form-label text-white">Password</label>

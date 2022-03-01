@@ -110,7 +110,7 @@
             $hpFt       = $hsl['hasil'];
             ?>
             <tr>
-                <th>Tahun (n)</th>
+                <th>Bulan (n)</th>
                 <th>Ft</th>
             </tr>
             <tr>
