@@ -41,12 +41,14 @@
             <?php
             // $no = 1;
             include "../../../config/config.php";
+            $getBulan = $conn->query("SELECT bulan FROM tbl_prediksi ORDER BY bulan DESC LIMIT 1")->fetch_assoc();
+            $lastBulan = $getBulan['bulan'];
             $count = $conn->query("SELECT COUNT(mad) as mad, COUNT(mse) as mse, COUNT(mape) as mape from tbl_prediksi")->fetch_assoc();
             $tMad  = $count['mad'] - 1;
             $tMse  = $count['mse'] - 1;
             $tMape = $count['mape'] - 1;
 
-            $ambil = $conn->query("SELECT mad, mse, mape FROM tbl_prediksi WHERE bulan = 12")->fetch_assoc();
+            $ambil = $conn->query("SELECT mad, mse, mape FROM tbl_prediksi WHERE bulan = $lastBulan")->fetch_assoc();
             $hMad  = $ambil['mad'] / $tMad;
             $hMse  = $ambil['mse'] / $tMse;
             $hMape = $ambil['mape'] / $tMape;
@@ -105,7 +107,7 @@
         <p>Hasil Prediksi :</p>
         <table border="1" width="20%" cellspacing="8" style="margin-top: 20px; border-collapse: collapse;" class="date" id="thtd">
             <?php
-            $hsl = $conn->query("SELECT hasil, bulan FROM tbl_prediksi WHERE bulan = 12")->fetch_assoc();
+            $hsl = $conn->query("SELECT hasil, bulan FROM tbl_prediksi WHERE bulan = $lastBulan")->fetch_assoc();
             $hpTahun    = bulan($hsl['bulan']);
             $hpFt       = $hsl['hasil'];
             ?>

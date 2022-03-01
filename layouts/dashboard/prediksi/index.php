@@ -18,7 +18,6 @@ if (isset($_POST['submit'])) {
 
     $data = $conn->query("SELECT penjualan_id, tgl_penjualan FROM tbl_penjualan ORDER BY tgl_penjualan ASC");
     foreach ($data as $no => $row) {
-        // $getPeriode    = htmlspecialchars($_POST['periode']);
         $periode       = $_POST['periode'];
 
         // id penjualan
@@ -30,9 +29,6 @@ if (isset($_POST['submit'])) {
         $start      = $no + 1;
         $startCount = $periode + 1;
         $end        = $getPeriode++;
-
-
-
 
         // cek nilai penjualan pada periode tersebut
         $cekJumlah = $conn->query("SELECT jumlah FROM tbl_penjualan WHERE penjualan_id = $exId")->fetch_assoc();
@@ -49,7 +45,7 @@ if (isset($_POST['submit'])) {
             $query = $conn->query("INSERT INTO tbl_prediksi (periode, jumlah, obat_id, bulan, tahun) VALUES ('$periode','$jumlah','$obat', '$bulan','$tahun')");
         }
         if ($getPeriode <= $row) {
-            $query_sum  = $conn->query("SELECT SUM(jumlah) as total FROM tbl_penjualan WHERE MONTH(tgl_penjualan) BETWEEN $start AND $end LIMIT $limit")->fetch_assoc();
+            $query_sum  = $conn->query("SELECT SUM(jumlah) as total FROM tbl_penjualan WHERE MONTH(tgl_penjualan) BETWEEN $start AND $end")->fetch_assoc();
             $total  = $query_sum['total'];
 
             $cekJumlah2 = $conn->query("SELECT jumlah FROM tbl_penjualan WHERE MONTH(tgl_penjualan) = '$getPeriode'")->fetch_assoc();
@@ -65,9 +61,7 @@ if (isset($_POST['submit'])) {
         }
 
         if ($getPeriode == $afterRow) {
-            // echo "SELECT jumlah FROM tbl_penjualan WHERE MONTH(tgl_penjualan) BETWEEN $limit  AND $row";
-            // echo "<br>";
-            $sum_jumlah  = $conn->query("SELECT SUM(jumlah) as total FROM tbl_penjualan WHERE MONTH(tgl_penjualan) BETWEEN $limit  AND $row")->fetch_assoc();
+            $sum_jumlah  = $conn->query("SELECT SUM(jumlah) as total FROM tbl_penjualan WHERE MONTH(tgl_penjualan) BETWEEN $limit AND $row")->fetch_assoc();
             $total_sum  = $sum_jumlah['total'];
             $avg = $total_sum / $periode;
 
@@ -75,9 +69,6 @@ if (isset($_POST['submit'])) {
             $total_mad  = $sum['total_mad'];
             $total_mse  = $sum['total_mse'];
             $total_mape = $sum['total_mape'];
-            // echo "SELECT SUM(mad) as total_mad, SUM(mse) as total_mse, SUM(mape) as total_mape FROM tbl_prediksi";
-            // echo "INSERT INTO tbl_prediksi (periode, obat_id, bulan, tahun, hasil, mad, mse, mape) VALUES ('$periode','$obat', '$getPeriode','$tahun','$avg','$total_mad','$total_mse','$total_mape')";
-            // echo "<br>";
 
             $query3 = $conn->query("INSERT INTO tbl_prediksi (periode, obat_id, bulan, tahun, hasil, mad, mse, mape) VALUES ('$periode','$obat', '$getPeriode','$tahun','$avg','$total_mad','$total_mse','$total_mape')");
         }

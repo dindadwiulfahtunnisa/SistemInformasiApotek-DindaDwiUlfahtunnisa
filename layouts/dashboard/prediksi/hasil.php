@@ -17,7 +17,10 @@ $tMad  = $count['mad'] - 1;
 $tMse  = $count['mse'] - 1;
 $tMape = $count['mape'] - 1;
 
-$ambil = $conn->query("SELECT mad, mse, mape FROM tbl_prediksi WHERE bulan = 12")->fetch_assoc();
+$getBulan = $conn->query("SELECT bulan FROM tbl_prediksi ORDER BY bulan DESC LIMIT 1")->fetch_assoc();
+$lastBulan = $getBulan['bulan'];
+
+$ambil = $conn->query("SELECT mad, mse, mape FROM tbl_prediksi WHERE bulan = $lastBulan")->fetch_assoc();
 $hMad  = $ambil['mad'] / $tMad;
 $hMse  = $ambil['mse'] / $tMse;
 $hMape = $ambil['mape'] / $tMape;
