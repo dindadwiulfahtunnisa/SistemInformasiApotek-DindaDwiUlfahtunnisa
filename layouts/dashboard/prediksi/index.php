@@ -18,6 +18,7 @@ if (isset($_POST['submit'])) {
 
     $data = $conn->query("SELECT penjualan_id, tgl_penjualan FROM tbl_penjualan WHERE obat_id = $obat ORDER BY tgl_penjualan ASC");
     foreach ($data as $no => $row) {
+
         $periode       = $_POST['periode'];
 
         // id penjualan
@@ -34,6 +35,7 @@ if (isset($_POST['submit'])) {
         // cek nilai penjualan pada periode tersebut
         $cekJumlah = $conn->query("SELECT jumlah FROM tbl_penjualan WHERE penjualan_id = $exId")->fetch_assoc();
         $jumlah = $cekJumlah['jumlah'];
+
         // var_dump($cekJumlah);
         // echo "SELECT jumlah FROM tbl_penjualan WHERE penjualan_id = $exId";
         // echo "<br>";
@@ -49,10 +51,10 @@ if (isset($_POST['submit'])) {
             $query = $conn->query("INSERT INTO tbl_prediksi (periode, jumlah, obat_id, bulan, tahun) VALUES ('$periode','$jumlah','$obat', '$bulan','$tahun')");
         }
         if ($getPeriode <= $row) {
-            $query_sum  = $conn->query("SELECT SUM(jumlah) as total FROM tbl_penjualan WHERE MONTH(tgl_penjualan) BETWEEN $start AND $end")->fetch_assoc();
+            $query_sum  = $conn->query("SELECT SUM(jumlah) as total FROM tbl_penjualan WHERE MONTH(tgl_penjualan) BETWEEN $start AND $end AND obat_id = $obat")->fetch_assoc();
             $total  = $query_sum['total'];
 
-            $cekJumlah2 = $conn->query("SELECT jumlah FROM tbl_penjualan WHERE MONTH(tgl_penjualan) = '$getPeriode'")->fetch_assoc();
+            $cekJumlah2 = $conn->query("SELECT jumlah FROM tbl_penjualan WHERE MONTH(tgl_penjualan) = '$getPeriode' AND obat_id = $obat")->fetch_assoc();
             $at     = $cekJumlah2['jumlah'];
 
             $hasil  = $total / $periode;
@@ -69,7 +71,7 @@ if (isset($_POST['submit'])) {
         }
 
         if ($getPeriode == $afterRow) {
-            $sum_jumlah  = $conn->query("SELECT SUM(jumlah) as total FROM tbl_penjualan WHERE MONTH(tgl_penjualan) BETWEEN $limit AND $row")->fetch_assoc();
+            $sum_jumlah  = $conn->query("SELECT SUM(jumlah) as total FROM tbl_penjualan WHERE MONTH(tgl_penjualan) BETWEEN $limit AND $row AND obat_id = $obat")->fetch_assoc();
             $total_sum  = $sum_jumlah['total'];
             $avg = $total_sum / $periode;
 
