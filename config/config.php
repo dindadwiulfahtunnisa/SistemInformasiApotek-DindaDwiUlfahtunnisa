@@ -3,8 +3,8 @@
 //koneksi ke database mysql,
 $localhost  = "localhost";
 $username   = "root";
-$password   = "root";
-$db         = "forecasting_apotek";
+$password   = "";
+$db         = "forecasting_apotek-280222";
 
 $conn = mysqli_connect($localhost, $username, $password, $db);
 
